@@ -10,3 +10,9 @@ export const IntroGreetingContainer = styled.div<IntroGreetingContainerProps>`
 
 export const ArcContainer = styled.div`
 `;
+
+export const DashboardWrapper = styled.div`
+  .grid {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 95%);
+  }
+`;

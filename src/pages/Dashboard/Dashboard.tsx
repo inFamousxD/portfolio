@@ -1,21 +1,31 @@
 import React from 'react'
 import Arc from './Arc/Arc'
-import { ArcContainer, IntroGreetingContainer } from './Dashboard.styles'
+import { ArcContainer, DashboardWrapper, IntroGreetingContainer } from './Dashboard.styles'
 import IntroGreeting from './IntroGreeting/IntroGreeting'
+import Name from './Name/Name'
+import { GridContainer } from './IntroGreeting/IntroGreeting.styles'
 
 const Dashboard = () => {
 
     const [intro, setIntro] = React.useState(true);
 
     return (
-        <React.Fragment>
-            {intro && <IntroGreetingContainer>
-                <IntroGreeting setIntro={setIntro} />
-            </IntroGreetingContainer>}
-            {!intro && <ArcContainer>
-                <Arc />
-            </ArcContainer>}
-        </React.Fragment>
+        <DashboardWrapper>
+            <GridContainer className='grid'>
+                {intro && <IntroGreetingContainer>
+                    <IntroGreeting setIntro={setIntro} />
+                </IntroGreetingContainer>}
+                {
+                    !intro && <Name />
+                }
+                {
+                    !intro && 
+                    <ArcContainer>
+                        <Arc />
+                    </ArcContainer>
+                }
+            </GridContainer>
+        </DashboardWrapper>
     )
 }
 

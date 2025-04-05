@@ -5,12 +5,18 @@ export const ArcRootStyled = styled.div`
     height: 100vh;
 
     .container {
-        width: 500px;
-        height: 500px;
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        transform-origin: 50% 50%;
+        top: 50px;
+        left: 60vw;
+        border-radius: 50%;
+        background: transparent;
         .dash {
             position: absolute;
             width: 25px;
-            height: 3px;
+            height: 2px;
             background-color: #ff4b4b;
         }
     }

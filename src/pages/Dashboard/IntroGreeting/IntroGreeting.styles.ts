@@ -12,8 +12,10 @@ interface GridProps {
 }
 
 interface TextBoxProps {
-    $x?: string;
-    $y?: string; 
+  $x?: string;
+  $y?: string;
+  $color?: string;
+  $fontSize?: string;
 }
 
 export const GridStyled = styled.div<GridProps>`
@@ -102,13 +104,21 @@ export const Gear = styled.path`
 `;
 
 export const AbsoluteTextBoxTitle = styled.div<TextBoxProps>`
-    position: absolute;
-    font-size: 32px;
-    padding: 12px;
-    margin-left: 300px;
-    width: 100%;
-    /* text-align: center; */
-    visibility: hidden;
-    top: ${(props) => `${props.$y}px` || 'inherit'};
-    left: ${(props) => `${props.$x}px` || 'inherit'};
+  position: absolute;
+  font-size: 32px;
+  padding: 12px;
+  margin-left: 300px;
+  width: 100%;
+  /* text-align: center; */
+  visibility: hidden;
+  top: ${(props) => `${props.$y}px` || "inherit"};
+  left: ${(props) => `${props.$x}px` || "inherit"};
+  color: ${(props) => `${props.$color}` || "inherit"};
+  font-size: ${(props) => `${props.$fontSize}` || "inherit"};
+
+  text-shadow: 0 0 15px ${(props) => `${props.$color}55` || "inherit"};
+
+  span {
+    background: transparent;
+  }
 `;
