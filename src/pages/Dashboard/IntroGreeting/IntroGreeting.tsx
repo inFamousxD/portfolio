@@ -7,7 +7,7 @@ function IntroGreeting(props) {
     const { setIntro } = props;
 
     useEffect(() => {
-        setIntro(false);
+        // setIntro(false);
         createTimeline()
             .add(['.square1', '.square2', '.square3'], {
                 opacity: 0,
