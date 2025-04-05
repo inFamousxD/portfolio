@@ -73,7 +73,7 @@ const Arc = () => {
         .add('.container', {
             scale: '0.30',
             duration: 2000,
-        }, '<+=4500')
+        }, '<+=3500')
         .add('.dash', {
             backgroundColor: ACCENT_BLUE
         }, '<<+=100')

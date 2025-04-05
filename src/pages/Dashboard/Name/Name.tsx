@@ -17,7 +17,7 @@ const Name = () => {
             visibility: 'visible',
             delay: (_, i) => i * 20,
             ease: 'out',
-        }, '+=800')
+        }, '<<+=800')
         .add('.greet-1 > .--2', {
             visibility: 'hidden',
             delay: (_, i) => i * 20,
@@ -27,7 +27,7 @@ const Name = () => {
             visibility: 'visible',
             delay: (_, i) => i * 20,
             ease: 'out',
-        }, '<<+=200')
+        }, '<<')
         .add('.things-i-do > .--1', {
             visibility: 'visible',
             delay: (_, i) => i * 20,

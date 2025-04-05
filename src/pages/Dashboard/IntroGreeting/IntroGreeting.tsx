@@ -46,8 +46,7 @@ function IntroGreeting(props) {
                 delay: 100,
                 x: '50vw',
                 ease: 'out(4)',
-                backgroundColor: '#ff4b4b'
-
+                backgroundColor: '#ff4b4b',
             })
             .add('.text-greet-1>span', {
                 visibility: 'visible',
