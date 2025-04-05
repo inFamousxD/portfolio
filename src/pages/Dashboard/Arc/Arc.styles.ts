@@ -13,9 +13,9 @@ export const ArcRootStyled = styled.div`
         left: 50vw;
         border-radius: 50%;
         background: transparent;
-        .dash {
+        .dash, .dash-2, .dash-3 {
             position: absolute;
-            width: 25px;
+            width: 2px;
             height: 2px;
             background-color: #ff4b4b;
         }

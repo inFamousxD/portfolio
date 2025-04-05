@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { ArcRootStyled } from "./Arc.styles"
 import { createTimeline } from "animejs"
-import { ACCENT_BLUE, ACCENT_YELLOW } from "../../../constants";
+import { ACCENT_GREEN, ACCENT_RED } from "../../../constants";
 
 const ARC_COUNT = 75;
 
@@ -19,12 +19,16 @@ const Arc = () => {
         const dashHeight = 2; // Height of dash from CSS
         
         createTimeline()
-        .add('.dash', {
+        .add(['.dash', '.dash-2'], {
             x: '400px',
             y: '400px',
             duration: 1000,
+        }).
+        add(['.dash', '.dash-2'], {
+            width: '25px',
+            duration: 100
         })
-        .add('.dash', {
+        .add(['.dash', '.dash-2'], {
             delay: (_, i) => i * 10,
             translateX: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
@@ -40,13 +44,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI);
             },
-            duration: 500,
+            duration: 200,
             ease: 'out'
         })
-        .add('.dash', {
-            opacity: '0.5',
+        .add(['.dash', '.dash-2'], {
+            opacity: '0.75',
             ease: 'out',
-            duration: 3000
+            duration: 2500
         })
         .add('.container', {
             rotate: '1turn',
@@ -56,27 +60,50 @@ const Arc = () => {
             delay: 0
         }, '<<')
         .add('.container', {
-            scale: '0.5',
+            scale: '0.65',
             duration: 2000,
-            delay: 1500,
+            delay: 3000,
         }, '<<')
-        .add('.dash', {
+        .add(['.dash', '.dash-2'], {
             width: '90px',
             height: '8px',
             ease: 'out',
             duration: 1000,
             borderRadius: '10px'
         }, '<<')
-        .add('.dash', {
-            backgroundColor: ACCENT_YELLOW
+        .add(['.dash', '.dash-2'], {
+            backgroundColor: ACCENT_GREEN
         }, '<<')
         .add('.container', {
-            scale: '0.30',
+            scale: '0.50',
             duration: 2000,
-        }, '<+=3500')
-        .add('.dash', {
-            backgroundColor: ACCENT_BLUE
+        }, '<<+=1400')
+        .add(['.dash', '.dash-2'], {
+            backgroundColor: ACCENT_RED,
+            rotate: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI)+45;
+            },
         }, '<<+=100')
+        .add('.dash-2', {
+            backgroundColor: ACCENT_GREEN,
+            rotate: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI)-45;
+            },
+        }, '<<')
+        .add('.dash-2', {
+            rotate: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI)+45;
+            },
+        }, '<<+=2000')
+        .add('.dash', {
+            rotate: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI)-45;
+            },
+        }, '<<')
         
     }, [])
 
@@ -86,6 +113,11 @@ const Arc = () => {
                 {
                     Array.from({ length: ARC_COUNT }, (_, index) => index + 1).map((_, i) => (
                         <div key={i} className="dash"></div>
+                    ))
+                }
+                {
+                    Array.from({ length: ARC_COUNT }, (_, index) => index + 1).map((_, i) => (
+                        <div key={i} className="dash-2"></div>
                     ))
                 }
             </div>

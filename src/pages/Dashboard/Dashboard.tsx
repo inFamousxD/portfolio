@@ -2,7 +2,7 @@ import React from 'react'
 import Arc from './Arc/Arc'
 import { ArcContainer, DashboardWrapper, IntroGreetingContainer } from './Dashboard.styles'
 import IntroGreeting from './IntroGreeting/IntroGreeting'
-import Name from './Name/Name'
+import Name from './LandingText/LandingText'
 import { GridContainer } from './IntroGreeting/IntroGreeting.styles'
 
 const Dashboard = () => {

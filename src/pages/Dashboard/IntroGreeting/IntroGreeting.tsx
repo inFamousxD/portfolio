@@ -8,7 +8,7 @@ function IntroGreeting(props) {
 
     useEffect(() => {
         // setIntro(false);
-        createTimeline()
+        createTimeline({ delay: 500 })
             .add(['.square1', '.square2', '.square3'], {
                 opacity: 0,
                 duration: 0

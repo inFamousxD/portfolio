@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { AbsoluteTextBoxTitle } from "../IntroGreeting/IntroGreeting.styles"
 import { createTimeline } from "animejs"
-import { ACCENT_GREEN, ACCENT_RED } from "../../../constants"
+import { ACCENT_BLUE, ACCENT_GREEN, ACCENT_RED } from "../../../constants"
 
 const Name = () => {
     useEffect(() => {
@@ -78,24 +78,44 @@ const Name = () => {
                     'Here\'s a few things that I do.'.split('').map(char => <span className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
-            <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'20px'} $y={'400'} className='web'>
+            <AbsoluteTextBoxTitle $color={ACCENT_BLUE} $fontSize={'20px'} $y={'400'} className='web'>
                 {
-                    'WEB // ReactJS. NodeJS. AngularJS. TypeScript. JavaScript.'.split('').map(char => <span className="--1">{char}</span>)
+                    'WEB //'.split('').map(char => <span className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
-            <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'20px'} $y={'475'} className='system'>
+            <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'20px'} $y={'425'} className='web'>
                 {
-                    'LANGUAGES // C/C++. Assembly. Linux/UNIX. Java. Python'.split('').map(char => <span className="--1">{char}</span>)
+                    'ReactJS. NodeJS. AngularJS. TypeScript. JavaScript.'.split('').map(char => <span className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
-            <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'20px'} $y={'550'} className='databases'>
+            <AbsoluteTextBoxTitle $color={ACCENT_BLUE} $fontSize={'20px'} $y={'475'} className='system'>
                 {
-                    'DB // MySQL. MongoDB. PostgreSQL. SQLite. Redis. Cassandra'.split('').map(char => <span className="--1">{char}</span>)
+                    'LANGUAGES //'.split('').map(char => <span className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
-            <AbsoluteTextBoxTitle $color={ACCENT_GREEN} $fontSize={'20px'} $y={'750'} className='research'>
+            <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'20px'} $y={'500'} className='system'>
                 {
-                    'RESEARCH // High Performance Computing. Optimization. Cloud. Schedulers. Operating Systems. Scalability'.split('').map(char => <span className="--1">{char}</span>)
+                    'C/C++. Assembly. Linux/UNIX. Java. Python'.split('').map(char => <span className="--1">{char}</span>)
+                }
+            </AbsoluteTextBoxTitle>
+            <AbsoluteTextBoxTitle $color={ACCENT_BLUE} $fontSize={'20px'} $y={'550'} className='databases'>
+                {
+                    'DB //'.split('').map(char => <span className="--1">{char}</span>)
+                }
+            </AbsoluteTextBoxTitle>
+            <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'20px'} $y={'575'} className='databases'>
+                {
+                    'MySQL. MongoDB. PostgreSQL. SQLite. Redis. Cassandra'.split('').map(char => <span className="--1">{char}</span>)
+                }
+            </AbsoluteTextBoxTitle>
+            <AbsoluteTextBoxTitle $color={ACCENT_BLUE} $fontSize={'20px'} $y={'750'} className='research'>
+                {
+                    'RESEARCH //'.split('').map(char => <span className="--1">{char}</span>)
+                }
+            </AbsoluteTextBoxTitle>
+            <AbsoluteTextBoxTitle $color={ACCENT_GREEN} $fontSize={'20px'} $y={'775'} className='research'>
+                {
+                    'High Performance Computing. Optimization. Cloud. Schedulers. Operating Systems. Scalability'.split('').map(char => <span className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
         </div>
