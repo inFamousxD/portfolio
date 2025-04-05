@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ACCENT_RED } from "../../../constants";
 
 // Define prop types interface
 interface GridProps {
@@ -97,6 +98,7 @@ export const Square = styled.div`
   height: 4rem;
   border: 2px solid white;
   border-radius: 10px;
+  box-shadow: 0px 0px 4px ${() => ACCENT_RED};
 `;
 
 export const Gear = styled.path`

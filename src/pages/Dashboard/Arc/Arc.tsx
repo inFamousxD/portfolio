@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { ArcRootStyled } from "./Arc.styles"
 import { createTimeline } from "animejs"
-import { stagger } from "animejs"
 import { ACCENT_BLUE, ACCENT_YELLOW } from "../../../constants";
 
 const ARC_COUNT = 75;
@@ -22,12 +21,8 @@ const Arc = () => {
         createTimeline()
         .add('.dash', {
             x: '400px',
-            y: stagger(['30px', '-10px']),
-            duration: 500
-        })
-        .add('.dash', {
             y: '400px',
-            duration: 500
+            duration: 1000,
         })
         .add('.dash', {
             delay: (_, i) => i * 10,
