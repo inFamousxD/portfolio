@@ -10,7 +10,7 @@ export const ArcRootStyled = styled.div`
         height: 800px;
         transform-origin: 50% 50%;
         top: 50px;
-        left: 60vw;
+        left: 50vw;
         border-radius: 50%;
         background: transparent;
         .dash {

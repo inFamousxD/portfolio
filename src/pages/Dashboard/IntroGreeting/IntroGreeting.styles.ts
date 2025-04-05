@@ -107,7 +107,7 @@ export const AbsoluteTextBoxTitle = styled.div<TextBoxProps>`
   position: absolute;
   font-size: 32px;
   padding: 12px;
-  margin-left: 300px;
+  margin-left: 200px;
   width: 100%;
   /* text-align: center; */
   visibility: hidden;

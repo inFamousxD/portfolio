@@ -48,14 +48,14 @@ const Name = () => {
         }, '<<+=250')
         .add(['.databases > .--1'], {
             visibility: 'visible',
-            delay: (_, i) => i * 20,
+            delay: (_, i) => i * 17,
             ease: 'out',
         }, '<<+=500')
         .add(['.research > .--1'], {
             visibility: 'visible',
-            delay: (_, i) => i * 20,
+            delay: (_, i) => i * 10,
             ease: 'out',
-        }, '<<')
+        }, '<<+=100')
     }, [])
 
     return (

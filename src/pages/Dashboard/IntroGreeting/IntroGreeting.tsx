@@ -14,20 +14,20 @@ function IntroGreeting(props) {
                 duration: 0
             })
             .add('.square1', {
-                x: '10vw',
+                x: '180px',
                 duration: 800,
                 ease: 'out',
                 opacity: '1'
             })
             .add('.square2', {
-                x: '10vw',
+                x: '180px',
                 rotate: '360',
                 duration: 500,
                 ease: 'out',
                 opacity: '1'
             }, "-=500")
             .add('.square3', {
-                x: '10vw',
+                x: '180px',
                 duration: 400,
                 ease: 'out',
                 opacity: '1'
