@@ -116,7 +116,7 @@ export const AbsoluteTextBoxTitle = styled.div<TextBoxProps>`
   color: ${(props) => `${props.$color}` || "inherit"};
   font-size: ${(props) => `${props.$fontSize}` || "inherit"};
 
-  text-shadow: 0 0 15px ${(props) => `${props.$color}55` || "inherit"};
+  text-shadow: 0 0 25px black;
 
   span {
     background: transparent;
