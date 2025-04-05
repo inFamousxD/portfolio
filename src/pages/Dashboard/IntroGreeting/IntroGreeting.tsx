@@ -44,7 +44,7 @@ function IntroGreeting(props) {
             }, '<<')
             .add(['.square1'], {
                 delay: 100,
-                x: '50vw',
+                x: '40vw',
                 ease: 'out(4)',
                 backgroundColor: '#ff4b4b',
             })
@@ -55,7 +55,7 @@ function IntroGreeting(props) {
             }, '<<+=50')
             .add(['.square2'], {
                 delay: 100,
-                x: '50vw',
+                x: '40vw',
                 ease: 'out(4)',
                 backgroundColor: '#ff4b4b'
 
@@ -67,7 +67,7 @@ function IntroGreeting(props) {
             }, '<<')
             .add(['.square3'], {
                 delay: 100,
-                x: '50vw',
+                x: '40vw',
                 ease: 'out(4)',
                 backgroundColor: '#ff4b4b'
             }, '<<+=200')
