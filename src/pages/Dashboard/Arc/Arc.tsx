@@ -64,12 +64,12 @@ const Arc = () => {
             translateX: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
-                return centerX + (radius - 100) * Math.cos(angle) - (dashWidth / 2);
+                return centerX + (radius - ((7 * window.innerHeight)/100)) * Math.cos(angle) - (dashWidth / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
-                return centerY + (radius - 100) * Math.sin(angle) - (dashHeight / 2);
+                return centerY + (radius - ((7 * window.innerHeight)/100)) * Math.sin(angle) - (dashHeight / 2);
             },
             duration: 1000,
             ease: 'inOut'
@@ -96,13 +96,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 40 here is DASHWIDTH *************************************
-                return centerX + (radius - 200) * Math.cos(angle) - (40 / 2);
+                return centerX + (radius - ((14 * window.innerHeight)/100)) * Math.cos(angle) - (40 / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 4 here is DASHHEIGHT *************************************
-                return centerY + (radius - 200) * Math.sin(angle) - (3 / 2);
+                return centerY + (radius - ((14 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
             duration: 1000,
             ease: 'inOut'
@@ -145,13 +145,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 40 here is DASHWIDTH *************************************
-                return centerX + (radius - 165) * Math.cos(angle) - (40 / 2);
+                return centerX + (radius - ((10 * window.innerHeight)/100)) * Math.cos(angle) - (40 / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 4 here is DASHHEIGHT *************************************
-                return centerY + (radius - 165) * Math.sin(angle) - (3 / 2);
+                return centerY + (radius - ((10 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
             duration: 1000,
             ease: 'inOut',
@@ -161,13 +161,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 40 here is DASHWIDTH *************************************
-                return centerX + (radius - 300) * Math.cos(angle) - (40 / 2);
+                return centerX + (radius - ((24 * window.innerHeight)/100)) * Math.cos(angle) - (40 / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 4 here is DASHHEIGHT *************************************
-                return centerY + (radius - 300) * Math.sin(angle) - (3 / 2);
+                return centerY + (radius - ((24 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
             duration: 3000,
             ease: 'inOutQuad',
@@ -179,13 +179,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 40 here is DASHWIDTH *************************************
-                return centerX + (radius - 260) * Math.cos(angle) - (40 / 2);
+                return centerX + (radius - ((19.5 * window.innerHeight)/100)) * Math.cos(angle) - (40 / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 4 here is DASHHEIGHT *************************************
-                return centerY + (radius - 260) * Math.sin(angle) - (3 / 2);
+                return centerY + (radius - ((19.5 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
             duration: 3000,
             ease: 'inOutQuad',
@@ -197,13 +197,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 40 here is DASHWIDTH *************************************
-                return centerX + (radius - 185) * Math.cos(angle) - (40 / 2);
+                return centerX + (radius - ((12.5 * window.innerHeight)/100)) * Math.cos(angle) - (40 / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 4 here is DASHHEIGHT *************************************
-                return centerY + (radius - 185) * Math.sin(angle) - (3 / 2);
+                return centerY + (radius - ((12.5 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
             duration: 1000,
             ease: 'inOut',
@@ -213,13 +213,13 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 40 here is DASHWIDTH *************************************
-                return centerX + (radius - 170) * Math.cos(angle) - (40 / 2);
+                return centerX + (radius - ((10.25 * window.innerHeight)/100)) * Math.cos(angle) - (40 / 2);
             },
             translateY: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 // Reduce radius by 20px to bring dashes closer to center
                 // IMP 4 here is DASHHEIGHT *************************************
-                return centerY + (radius - 170) * Math.sin(angle) - (3 / 2);
+                return centerY + (radius - ((10.25 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
             duration: 1000,
             ease: 'inOut',
