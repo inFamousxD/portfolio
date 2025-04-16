@@ -7,7 +7,7 @@ import { GridContainer } from './IntroGreeting/IntroGreeting.styles'
 
 const Dashboard = () => {
 
-    const [intro, setIntro] = React.useState(false);
+    const [intro, setIntro] = React.useState(true);
 
     return (
         <DashboardWrapper>
