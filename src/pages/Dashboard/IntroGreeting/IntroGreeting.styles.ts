@@ -13,10 +13,12 @@ interface GridProps {
 }
 
 interface TextBoxProps {
-  $x?: string;
-  $y?: string;
+  $top?: string;
+  $left?: string;
   $color?: string;
   $fontSize?: string;
+  $padding?: string;
+  $margin?: string;
 }
 
 export const GridStyled = styled.div<GridProps>`
@@ -93,11 +95,11 @@ export const GridContainer = styled(GridStyled)<GridProps>`
 `;
 
 export const Square = styled.div`
-  margin: 10px;
-  width: 4rem;
-  height: 4rem;
+  margin: 1vh;
+  width: 5vh;
+  height: 5vh;
   border: 2px solid white;
-  border-radius: 10px;
+  border-radius: 1vh;
   box-shadow: 0px 0px 4px ${() => ACCENT_RED};
 `;
 
@@ -107,18 +109,20 @@ export const Gear = styled.path`
 
 export const AbsoluteTextBoxTitle = styled.div<TextBoxProps>`
   position: absolute;
-  font-size: 32px;
-  padding: 12px;
-  margin-left: 200px;
+  /* font-size: 32px; */
+  /* padding: 12px; */
+  /* margin-left: 200px; */
   width: 100%;
   /* text-align: center; */
   visibility: hidden;
-  top: ${(props) => `${props.$y}px` || "inherit"};
-  left: ${(props) => `${props.$x}px` || "inherit"};
+  top: ${(props) => `${props.$top}` || "inherit"};
+  left: ${(props) => `${props.$left}` || "inherit"};
   color: ${(props) => `${props.$color}` || "inherit"};
   font-size: ${(props) => `${props.$fontSize}` || "inherit"};
+  padding: ${(props) => `${props.$padding}` || "inherit"};
+  margin: ${(props) => `${props.$margin}` || "inherit"};
 
-  text-shadow: 0 0 25px black;
+  text-shadow: 0 0 32px black;
 
   span {
     background: transparent;

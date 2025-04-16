@@ -5,6 +5,7 @@ import { ACCENT_GREEN, ACCENT_RED } from "../../../constants";
 
 const ARC_COUNT = 75;
 
+// TODO: Change circle radius changing calc from px to screenratio
 const Arc = () => {
     useEffect(() => {
         const container = document.querySelector('.container');
@@ -15,13 +16,13 @@ const Arc = () => {
         const radius = Math.min(centerX, centerY) * 0.8;
         
         // Get dash dimensions for centering calculations
-        const dashWidth = 25; // Width of dash from CSS
-        const dashHeight = 2; // Height of dash from CSS
+        let dashWidth = 25; // Width of dash from CSS
+        let dashHeight = 2; // Height of dash from CSS
         
         createTimeline()
         .add(['.dash', '.dash-2'], {
-            x: '400px',
-            y: '400px',
+            x: `${(40 * window.innerHeight) / 100}px`,
+            y: `${(20 * window.innerWidth) / 100}px`,
             duration: 1000,
         }).
         add(['.dash', '.dash-2'], {
@@ -59,24 +60,52 @@ const Arc = () => {
             loop: true,
             delay: 0
         }, '<<')
+        .add(['.dash', '.dash-2'], {
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                return centerX + (radius - 100) * Math.cos(angle) - (dashWidth / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                return centerY + (radius - 100) * Math.sin(angle) - (dashHeight / 2);
+            },
+            duration: 1000,
+            ease: 'inOut'
+        }, '<<+=2500')
         .add('.container', {
-            scale: '0.65',
+            // scale: '0.65',
             duration: 2000,
             delay: 3000,
         }, '<<')
         .add(['.dash', '.dash-2'], {
-            width: '90px',
-            height: '8px',
+            onBegin: () => { dashWidth=40; dashHeight=3; },
+            width: '40px',
+            height: '3px',
             ease: 'out',
             duration: 1000,
-            borderRadius: '10px'
+            borderRadius: '10px',
         }, '<<')
         .add(['.dash', '.dash-2'], {
             backgroundColor: ACCENT_GREEN
-        }, '<<')
-        .add('.container', {
-            scale: '0.50',
-            duration: 2000,
+        }, '<<+=300')
+        .add(['.dash', '.dash-2'], {
+            onBegin: () => { console.log('dashw', dashWidth) },
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 40 here is DASHWIDTH *************************************
+                return centerX + (radius - 200) * Math.cos(angle) - (40 / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 4 here is DASHHEIGHT *************************************
+                return centerY + (radius - 200) * Math.sin(angle) - (3 / 2);
+            },
+            duration: 1000,
+            ease: 'inOut'
         }, '<<+=1400')
         .add(['.dash', '.dash-2'], {
             backgroundColor: ACCENT_RED,
@@ -84,7 +113,7 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI)+45;
             },
-        }, '<<+=100')
+        }, '<<+=200')
         .add('.dash-2', {
             backgroundColor: ACCENT_GREEN,
             rotate: (_, i) => {
@@ -104,6 +133,97 @@ const Arc = () => {
                 return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI)-45;
             },
         }, '<<')
+        .add(['.dash'], {
+            // opacity: '0',
+            loop: true,
+            ease: 'outCirc',
+            alternate: true,
+            duration: 1800
+        }, '<<+=1000')
+        .add(['.dash-2'], {
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 40 here is DASHWIDTH *************************************
+                return centerX + (radius - 165) * Math.cos(angle) - (40 / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 4 here is DASHHEIGHT *************************************
+                return centerY + (radius - 165) * Math.sin(angle) - (3 / 2);
+            },
+            duration: 1000,
+            ease: 'inOut',
+        }, '<<+=1400')
+        .add(['.dash'], {
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 40 here is DASHWIDTH *************************************
+                return centerX + (radius - 300) * Math.cos(angle) - (40 / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 4 here is DASHHEIGHT *************************************
+                return centerY + (radius - 300) * Math.sin(angle) - (3 / 2);
+            },
+            duration: 3000,
+            ease: 'inOutQuad',
+            // loop: true,
+            // alternate: true,
+        }, '<<+=10')
+        .add(['.dash'], {
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 40 here is DASHWIDTH *************************************
+                return centerX + (radius - 260) * Math.cos(angle) - (40 / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 4 here is DASHHEIGHT *************************************
+                return centerY + (radius - 260) * Math.sin(angle) - (3 / 2);
+            },
+            duration: 3000,
+            ease: 'inOutQuad',
+            loop: true,
+            alternate: true,
+        }, '<<+=3000')
+        .add(['.dash-2'], {
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 40 here is DASHWIDTH *************************************
+                return centerX + (radius - 185) * Math.cos(angle) - (40 / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 4 here is DASHHEIGHT *************************************
+                return centerY + (radius - 185) * Math.sin(angle) - (3 / 2);
+            },
+            duration: 1000,
+            ease: 'inOut',
+        }, '<<+=200')
+        .add(['.dash-2'], {
+            translateX: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 40 here is DASHWIDTH *************************************
+                return centerX + (radius - 170) * Math.cos(angle) - (40 / 2);
+            },
+            translateY: (_, i) => {
+                const angle = (i / dashes.length) * Math.PI * 2;
+                // Reduce radius by 20px to bring dashes closer to center
+                // IMP 4 here is DASHHEIGHT *************************************
+                return centerY + (radius - 170) * Math.sin(angle) - (3 / 2);
+            },
+            duration: 1000,
+            ease: 'inOut',
+        }, '<<+=1000')
         
     }, [])
 

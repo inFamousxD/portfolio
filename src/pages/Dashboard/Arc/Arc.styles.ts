@@ -6,10 +6,10 @@ export const ArcRootStyled = styled.div`
 
     .container {
         position: absolute;
-        width: 800px;
-        height: 800px;
+        width: 40vw;
+        height: 40vw;
         transform-origin: 50% 50%;
-        top: 50px;
+        top: 0vh;
         left: 50vw;
         border-radius: 50%;
         background: transparent;
