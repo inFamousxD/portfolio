@@ -229,8 +229,7 @@ const Arc = () => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI) + 270;
             },
-            duration: 5000,
-            delay: 1000,
+            duration: 3000,
             ease: 'inOut'
         }, '<<+=1000')
         .add('.dash-2', {
@@ -239,9 +238,8 @@ const Arc = () => {
                 return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI) + 45;
             },
             duration: 5000,
-            delay: 1000,
             ease: 'inOutExpo'
-        }, '<<+=6000')
+        }, '<<+=3000')
         
     }, [])
 
