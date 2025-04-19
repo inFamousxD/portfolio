@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ACCENT_RED } from "../../../constants";
 
 export const ArcRootStyled = styled.div`
     width: 100vw;
@@ -18,6 +19,7 @@ export const ArcRootStyled = styled.div`
             width: 2px;
             height: 2px;
             background-color: #ff4b4b;
+            color: ${ACCENT_RED}
         }
     }
 `;

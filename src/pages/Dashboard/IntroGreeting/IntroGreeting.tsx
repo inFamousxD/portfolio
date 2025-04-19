@@ -49,7 +49,7 @@ function IntroGreeting(props) {
             ease: 'out',
         }, '<<')
         .add(['.square1', '.square2', '.square3'], {
-            borderColor: '#ff4b4b',
+            borderColor: ACCENT_RED,
         }, '<<');
         
         // text location prep
@@ -69,7 +69,7 @@ function IntroGreeting(props) {
             delay: 100,
             x: '55vw',
             ease: 'out(4)',
-            backgroundColor: '#ff4b4b',
+            backgroundColor: ACCENT_RED,
         })
         .add('.text-greet-1>span', {
             visibility: 'visible',
@@ -83,7 +83,7 @@ function IntroGreeting(props) {
             delay: 100,
             x: '55vw',
             ease: 'out(4)',
-            backgroundColor: '#ff4b4b'
+            backgroundColor: ACCENT_RED
         })
         .add('.text-greet-2>span', {
             visibility: 'visible',
@@ -97,7 +97,7 @@ function IntroGreeting(props) {
             delay: 100,
             x: '55vw',
             ease: 'out(4)',
-            backgroundColor: '#ff4b4b'
+            backgroundColor: ACCENT_RED
         }, '<<+=200')
         .add('.text-greet-3>span', {
             visibility: 'visible',

@@ -21,8 +21,10 @@ const Arc = () => {
         
         createTimeline()
         .add(['.dash', '.dash-2'], {
-            x: `${(40 * window.innerHeight) / 100}px`,
-            y: `${(20 * window.innerWidth) / 100}px`,
+            // x: `${(40 * window.innerHeight) / 100}px`,
+            // y: `${(20 * window.innerWidth) / 100}px`,
+            x: centerX,
+            y: centerY,
             duration: 1000,
         }).
         add(['.dash', '.dash-2'], {
@@ -169,7 +171,7 @@ const Arc = () => {
                 // IMP 4 here is DASHHEIGHT *************************************
                 return centerY + (radius - ((24 * window.innerHeight)/100)) * Math.sin(angle) - (3 / 2);
             },
-            duration: 3000,
+            duration: 2000,
             ease: 'inOutQuad',
             // loop: true,
             // alternate: true,
@@ -227,20 +229,19 @@ const Arc = () => {
         .add('.dash-2', {
             rotate: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
-                return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI) + 270;
+                return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI) + 280;
             },
             duration: 3000,
             ease: 'inOut'
-        }, '<<+=1000')
+        }, '<<')
         .add('.dash-2', {
             rotate: (_, i) => {
                 const angle = (i / dashes.length) * Math.PI * 2;
                 return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI) + 45;
             },
-            duration: 5000,
-            ease: 'inOutExpo'
+            duration: 2500,
+            ease: 'inOutExpo',
         }, '<<+=3000')
-        
     }, [])
 
     return (

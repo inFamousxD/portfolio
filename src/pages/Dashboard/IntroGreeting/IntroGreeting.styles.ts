@@ -92,6 +92,7 @@ export const GridContainer = styled(GridStyled)<GridProps>`
   height: 100%;
   min-height: ${(props) => props.$minHeight || "100vh"};
   overflow: ${(props) => props.$overflow || "hidden"};
+  z-index: 10;
 `;
 
 export const Square = styled.div`

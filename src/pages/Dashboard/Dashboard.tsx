@@ -1,6 +1,6 @@
 import React from 'react'
 import Arc from './Arc/Arc'
-import { ArcContainer, DashboardWrapper, IntroGreetingContainer } from './Dashboard.styles'
+import { ArcContainer, DashboardWrapper, IntroGreetingContainer, TickerContainer } from './Dashboard.styles'
 import IntroGreeting from './IntroGreeting/IntroGreeting'
 import Name from './LandingText/LandingText'
 import { GridContainer } from './IntroGreeting/IntroGreeting.styles'
@@ -25,6 +25,8 @@ const Dashboard = () => {
                     </ArcContainer>
                 }
             </GridContainer>
+            <TickerContainer />
+                {/* <div style={{ height: '200vh', background: 'transparent' }}></div> */}
         </DashboardWrapper>
     )
 }
