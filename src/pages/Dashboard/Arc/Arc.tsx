@@ -1,12 +1,13 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { ArcRootStyled } from "./Arc.styles"
-import { createTimeline } from "animejs"
+import { createTimeline, Timeline } from "animejs"
 import { ACCENT_GREEN, ACCENT_RED } from "../../../constants";
 
 const ARC_COUNT = 75;
 
 // TODO: Change circle radius changing calc from px to screenratio
 const Arc = () => {
+    const arcTimeline = useRef<Timeline>(null);
     useEffect(() => {
         const container = document.querySelector('.container');
         const dashes = document.querySelectorAll('.dash');
@@ -19,7 +20,7 @@ const Arc = () => {
         let dashWidth = 25; // Width of dash from CSS
         let dashHeight = 2; // Height of dash from CSS
         
-        createTimeline()
+        arcTimeline.current = createTimeline()
         .add(['.dash', '.dash-2'], {
             // x: `${(40 * window.innerHeight) / 100}px`,
             // y: `${(20 * window.innerWidth) / 100}px`,

@@ -1,24 +1,26 @@
-import { createTimeline } from 'animejs';
-import { useEffect } from 'react';
-import { AbsoluteTextBoxTitle, Square } from './IntroGreeting.styles';
+import { createTimeline, Timeline } from 'animejs';
+import { useEffect, useRef } from 'react';
+import { AbsoluteTextBoxTitle, IntroGreetingContainerStyled, SkipButtonStyled, Square } from './IntroGreeting.styles';
 import { ACCENT_RED } from '../../../constants';
 
 function IntroGreeting(props) {
     const { setIntro } = props;
 
+    const introTimeline = useRef<Timeline>(null);
+
     useEffect(() => {
         // setIntro(false);
-        let introTimeline = createTimeline({ delay: 500 });
+        introTimeline.current = createTimeline({ delay: 500 });
 
         // init
-        introTimeline
+        introTimeline.current
         .add(['.square1', '.square2', '.square3'], {
             opacity: 0,
             duration: 0
         });
         
         // fade in and translate right
-        introTimeline
+        introTimeline.current
         .add('.square1', {
             x: '5vw',
             duration: 800,
@@ -40,7 +42,7 @@ function IntroGreeting(props) {
         }, "-=250");
 
         // pull down and lower scale: 2, 3
-        introTimeline
+        introTimeline.current
         .add(['.square2', '.square3'], {
             y: '10vh'
         })
@@ -53,7 +55,7 @@ function IntroGreeting(props) {
         }, '<<');
         
         // text location prep
-        introTimeline
+        introTimeline.current
         .set('.text-greet-1', {
         })
         .set('.text-greet-2', {
@@ -64,7 +66,7 @@ function IntroGreeting(props) {
         })
         
         // move right, "hey"
-        introTimeline
+        introTimeline.current
         .add(['.square1'], {
             delay: 100,
             x: '55vw',
@@ -78,7 +80,7 @@ function IntroGreeting(props) {
         }, '<<+=50');
 
         // move right, "welcome"
-        introTimeline
+        introTimeline.current
         .add(['.square2'], {
             delay: 100,
             x: '55vw',
@@ -92,7 +94,7 @@ function IntroGreeting(props) {
         }, '<<');
 
         // move right, "to the machine"
-        introTimeline
+        introTimeline.current
         .add(['.square3'], {
             delay: 100,
             x: '55vw',
@@ -106,7 +108,7 @@ function IntroGreeting(props) {
         }, '<<');
 
         // turn and hide squares
-        introTimeline
+        introTimeline.current
         .add(['.square1', '.square2', '.square3'], {
             rotate: '1turn',
         })
@@ -117,7 +119,7 @@ function IntroGreeting(props) {
         }, "<<");
 
         // remove text, finish
-        introTimeline
+        introTimeline.current
         .add(['.text-greet-1>span', '.text-greet-2>span', '.text-greet-3>span'], {
             visibility: 'hidden',
             delay: (_, i) => i * 25, // Function based value
@@ -127,7 +129,8 @@ function IntroGreeting(props) {
     }, []);
 
     return (
-        <div>
+        <IntroGreetingContainerStyled>
+            <SkipButtonStyled className='button-skip' onClick={() => { console.log('Finished!'); introTimeline.current.complete()}}>SKIP</SkipButtonStyled>
             <div>
                 <div className='scope1' style={{ marginTop: '5vh', minHeight: '500px' }}>
                     <AbsoluteTextBoxTitle $color={ACCENT_RED} className='text-greet-1' $fontSize={'3.25vh'} $margin={'0px 0px 0px 12vw'} $padding={'4px'}>
@@ -150,7 +153,7 @@ function IntroGreeting(props) {
                     <Square className='square3'></Square>
                 </div>
             </div>
-        </div>
+        </IntroGreetingContainerStyled>
     )
 }
 

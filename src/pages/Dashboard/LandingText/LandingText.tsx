@@ -2,8 +2,29 @@ import { useEffect } from "react"
 import { AbsoluteTextBoxTitle } from "../IntroGreeting/IntroGreeting.styles"
 import { createTimeline } from "animejs"
 import { ACCENT_BLUE, ACCENT_GREEN, ACCENT_RED } from "../../../constants"
+import { StandardButtonStyled } from "../../../common/common.styles"
 
 const Name = () => {
+    const handleMoreBtnClicked = () => {
+        window.scrollTo({
+            top: window.innerHeight * 0.95,
+            behavior: 'smooth'
+        });
+    }
+
+    useEffect(() => {
+        let scrollButtonTimeline = createTimeline();
+        scrollButtonTimeline
+        .add('.button-more', {
+            opacity: 0.9
+        }, '+2000')
+        .add('.button-more', {
+            y: -10,
+            alternate: true,
+            loop: true
+        }, '<<')
+    })
+
     useEffect(() => {
         createTimeline({
             delay: 2000
@@ -62,7 +83,7 @@ const Name = () => {
     }, [])
 
     return (
-        <div>
+        <div className="test">
             <AbsoluteTextBoxTitle $color={ACCENT_RED} $fontSize={'2.75vh'} $left={'6vw'} $top={'30vh'} className='name'>
                 {
                     'I\'m Aaditya. '.split('').map((char, i) => <span key={i} className="--1">{char}</span>)
@@ -121,6 +142,7 @@ const Name = () => {
                     'High Performance Computing. Optimization. Cloud. Schedulers. Operating Systems. Scalability'.split('').map((char, i) => <span key={i} className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
+            <StandardButtonStyled onClick={handleMoreBtnClicked} className="button-more" $isAbsolute={true} $top={'90vh'} $left={'45vw'} $width={'200px'} $height={'50px'} $opacity={'0'}>Find out More</StandardButtonStyled>
         </div>
     )
 }

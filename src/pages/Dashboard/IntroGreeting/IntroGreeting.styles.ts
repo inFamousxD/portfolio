@@ -86,13 +86,12 @@ export const GridStyled = styled.div<GridProps>`
   }
 `;
 
-// Extend the base grid with container properties
-export const GridContainer = styled(GridStyled)<GridProps>`
+export const GridContainer = styled(GridStyled) <GridProps>`
   width: 100%;
   height: 100%;
   min-height: ${(props) => props.$minHeight || "100vh"};
   overflow: ${(props) => props.$overflow || "hidden"};
-  z-index: 10;
+  z-index: 1;
 `;
 
 export const Square = styled.div`
@@ -128,4 +127,23 @@ export const AbsoluteTextBoxTitle = styled.div<TextBoxProps>`
   span {
     background: transparent;
   }
+`;
+
+export const IntroGreetingContainerStyled = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
+export const SkipButtonStyled = styled.button`
+  z-index: 10;
+  color: ${ACCENT_RED};
+  width: 80px;
+  height: 40px;
+  border: 1px solid ${ACCENT_RED};
+  position: absolute;
+  border-radius: 10px;
+  opacity: 0.6;
+  right: 1vw;
+  top: 3.5vh;
+  cursor: pointer;
 `;
