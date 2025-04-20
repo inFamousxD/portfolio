@@ -4,9 +4,17 @@
 body,
 html {
   font-family: Roboto Mono;
-  background-color: #252423;
+  /* background-color: #252423; */
   /* overflow: hidden; */
   /* color: #ff4b4b; */
+}
+
+body {
+    background-color: #252423;
+}
+
+button {
+    background-color: #252423;
 }
 
 /* ===== Scrollbar CSS ===== */
