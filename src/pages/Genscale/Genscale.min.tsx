@@ -71,9 +71,9 @@ const Genscalemin: React.FC = () => {
                     </ul>
                 </div>
                 <div className='source'>
-                    Click <a title='here' href='https://chameleoncloud.org/blog/2024/12/30/minimizing-out-of-memory-failures-in-genomics-workflow-execution/'>here</a> to know more
+                    Click <a target="_blank" rel="noopener noreferrer" title='here' href='https://chameleoncloud.org/blog/2024/12/30/minimizing-out-of-memory-failures-in-genomics-workflow-execution/'>here</a> to know more
                     <br />
-                    github: [privated till the paper is published]
+                    github: /* privated till the research is published */
                 </div>
             </div>
             <div className='right-col'>

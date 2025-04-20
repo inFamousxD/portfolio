@@ -76,7 +76,7 @@ const Arc = () => {
             },
             duration: 1000,
             ease: 'inOut'
-        }, '<<+=2500')
+        }, '<<+=1300')
         .add('.container', {
             // scale: '0.65',
             duration: 2000,

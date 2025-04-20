@@ -9,6 +9,7 @@ export const GenscaleminContainerStyled = styled.div`
 
     display: flex;
     flex-direction: row;
+    font-size: 1.55vh;
 
     .left-col {
         display: flex;
@@ -20,11 +21,11 @@ export const GenscaleminContainerStyled = styled.div`
         opacity: 0;
         padding: 20px;
         
-        border: 2px dashed ${ACCENT_BLUE}50;
+        /* border: 2px dashed ${ACCENT_BLUE}50; */
         border-radius: 20px;
         
         /* width: fit-content; */
-        margin: 10px 0px 0px 5vw;
+        margin: 10px 0px 0px 20px;
     }
     
     .title {
@@ -33,7 +34,7 @@ export const GenscaleminContainerStyled = styled.div`
             color: ${ACCENT_RED};
         }
         .main {
-            font-size: 24px;
+            font-size: 2vh !important;
         }
         .sub {
             color: ${ACCENT_GREEN};
@@ -72,9 +73,10 @@ export const GenscaleminContainerStyled = styled.div`
             flex-grow: 1;
             border-radius: 20px;
             padding: 20px;
-            border: 2px dashed ${ACCENT_BLUE}50;
-            margin: 120px 5vw 0px 1vw;
+            /* border: 2px dashed ${ACCENT_BLUE}50; */
+            margin: 120px 20px 0px 1vw;
             opacity: 0;
+            align-content: center;
             
             img {
                 width: 38vw;

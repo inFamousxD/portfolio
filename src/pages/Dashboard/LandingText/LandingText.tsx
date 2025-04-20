@@ -43,7 +43,7 @@ const Name = () => {
             visibility: 'hidden',
             delay: (_, i) => i * 20,
             ease: 'out',
-        }, '+=1500')
+        }, '+=100')
         .add('.name > .--1-2', {
             visibility: 'visible',
             delay: (_, i) => i * 20,
