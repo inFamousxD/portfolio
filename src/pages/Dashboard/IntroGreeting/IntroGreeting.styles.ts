@@ -140,7 +140,7 @@ export const SkipButtonStyled = styled.button`
   width: 80px;
   height: 40px;
   border: 1px solid ${ACCENT_RED};
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
   opacity: 0.6;
   right: 1vw;

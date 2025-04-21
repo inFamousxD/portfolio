@@ -192,7 +192,7 @@ const Arc = () => {
             },
             duration: 3000,
             ease: 'inOutQuad',
-            loop: true,
+            loop: 5,
             alternate: true,
         }, '<<+=3000')
         .add(['.dash-2'], {

@@ -142,7 +142,7 @@ const Name = () => {
                     'High Performance Computing. Optimization. Cloud. Schedulers. Operating Systems. Scalability'.split('').map((char, i) => <span key={i} className="--1">{char}</span>)
                 }
             </AbsoluteTextBoxTitle>
-            <StandardButtonStyled onClick={handleMoreBtnClicked} className="button-more" $isAbsolute={true} $top={'90vh'} $left={'45vw'} $width={'200px'} $height={'50px'} $opacity={'0'}>Find out More</StandardButtonStyled>
+            <StandardButtonStyled onClick={handleMoreBtnClicked} className="button-more" $isAbsolute={true} $top={'90vh'} $left={'44vw'} $width={'200px'} $height={'50px'} $opacity={'0'}>Find out More</StandardButtonStyled>
         </div>
     )
 }

@@ -13,6 +13,7 @@ interface StandardButtonProps {
   $top?: string;
   $left?: string;
   $opacity?: string;
+  $origin?: string;
 }
 
 export const StandardButtonStyled = styled.button<StandardButtonProps>`
@@ -28,6 +29,7 @@ export const StandardButtonStyled = styled.button<StandardButtonProps>`
   ${props => props.$isAbsolute && props.$left ? `left: ${props.$left};` : ""}
   cursor: pointer;
   opacity: ${props => props.$opacity || 1};
+  transform-origin: ${props => props.$origin || "0% 0%"};
 `;
 
 // Default props will be applied when not specified

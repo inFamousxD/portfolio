@@ -16,21 +16,24 @@ export const GenscaleminContainerStyled = styled.div`
         flex-direction: column;
         /* row-gap: 10px; */
     }
-    
-    .title, .desc, .source {
+
+    .title,
+    .desc,
+    .source {
         opacity: 0;
         padding: 20px;
-        
+
         /* border: 2px dashed ${ACCENT_BLUE}50; */
         border-radius: 20px;
-        
+
         /* width: fit-content; */
         margin: 10px 0px 0px 20px;
     }
-    
+
     .title {
         margin-top: 120px;
-        .main, .sub {
+        .main,
+        .sub {
             color: ${ACCENT_RED};
         }
         .main {
@@ -43,7 +46,7 @@ export const GenscaleminContainerStyled = styled.div`
             margin-top: 10px;
         }
     }
-    
+
     .desc {
         flex-grow: 1;
         color: white;
@@ -54,7 +57,7 @@ export const GenscaleminContainerStyled = styled.div`
             margin-top: 10px;
         }
     }
-    
+
     .source {
         color: ${ACCENT_RED};
 
@@ -77,7 +80,7 @@ export const GenscaleminContainerStyled = styled.div`
             margin: 120px 20px 0px 1vw;
             opacity: 0;
             align-content: center;
-            
+
             img {
                 width: 38vw;
                 border-radius: 15px;
