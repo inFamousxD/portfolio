@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { GenscaleminContainerStyled } from "./Genscale.styles";
-import { animate, onScroll, svg } from "animejs";
+import { animate, onScroll } from "animejs";
 
 // import genscaleImage from "../../assets/genscale.png";
 import genscaleSVG from "../../assets/genscale-sysdesign.svg";
@@ -23,42 +23,18 @@ const Genscalemin: React.FC = () => {
     });
 
     useEffect(() => {
-        animate([".desc", ".source"], {
+        animate([".genscale-desc", ".source"], {
             y: -100,
             ease: "linear",
             opacity: 1,
             autoplay: onScroll({
                 container: "body",
-                enter: "bottom-=10vh top",
+                enter: "bottom-=30vh top",
                 leave: "top+=90vh top",
                 sync: 0.15,
                 // debug: true,
             }),
         });
-
-        animate(svg.createDrawable(['.gensvg rect', '.gensvg path', '.gensvg g']), {
-            draw: '0 1',
-            ease: 'out(4)',
-            autoplay: onScroll({
-                container: "body",
-                target: ".diagram",
-                enter: "bottom-=30vh top",
-                leave: "top+=30vh top",
-                sync: 0.15,
-            }),
-        })
-
-        animate(svg.createDrawable(['rect', 'path', 'g']), {
-            draw: '0 1',
-            ease: 'out(4)',
-            autoplay: onScroll({
-                container: "body",
-                target: ".gensvg",
-                enter: "top top",
-                leave: "top+=20vh bottom",
-                sync: 1,
-            }),
-        }).alternate()
     });
 
     return (
@@ -77,7 +53,7 @@ const Genscalemin: React.FC = () => {
                         Lang: TypeScript, C++ [Metrics], Python, Bash
                     </div>
                 </div>
-                <div className="desc">
+                <div className="genscale-desc">
                     <p className="project-intro">
                         <strong>
                             Engineered a high-performance benchmarking platform

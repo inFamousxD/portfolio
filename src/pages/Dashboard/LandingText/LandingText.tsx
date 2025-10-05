@@ -7,7 +7,7 @@ import { StandardButtonStyled } from "../../../common/common.styles"
 const Name = () => {
     const handleMoreBtnClicked = () => {
         window.scrollTo({
-            top: window.innerHeight * 0.95,
+            top: window.innerHeight * 1.05,
             behavior: 'smooth'
         });
     }

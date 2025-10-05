@@ -18,7 +18,7 @@ export const GenscaleminContainerStyled = styled.div`
     }
 
     .title,
-    .desc,
+    .genscale-desc,
     .source {
         opacity: 0;
         padding: 20px;
@@ -47,7 +47,7 @@ export const GenscaleminContainerStyled = styled.div`
         }
     }
 
-    .desc {
+    .genscale-desc {
         flex-grow: 1;
         color: white;
         strong {
