@@ -44,6 +44,7 @@ const Dashboard = () => {
             x: '-90vw',
             rotate: '3turn',
             ease: 'linear',
+            borderRadius: '50%',
             backgroundColor: `${ACCENT_GREEN}`,
             autoplay: onScroll({
                 container: 'body',
