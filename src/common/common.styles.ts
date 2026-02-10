@@ -2,18 +2,18 @@ import styled from "styled-components";
 import { ACCENT_RED } from "../constants";
 
 interface StandardButtonProps {
-  $color?: string;
-  $width?: string;
-  $height?: string;
-  $borderColor?: string;
-  $borderRadius?: string;
-  $fontFamily?: string;
-  $zIndex?: number;
-  $isAbsolute?: boolean;
-  $top?: string;
-  $left?: string;
-  $opacity?: string;
-  $origin?: string;
+    $color?: string;
+    $width?: string;
+    $height?: string;
+    $borderColor?: string;
+    $borderRadius?: string;
+    $fontFamily?: string;
+    $zIndex?: number;
+    $isAbsolute?: boolean;
+    $top?: string;
+    $left?: string;
+    $opacity?: string;
+    $origin?: string;
 }
 
 export const StandardButtonStyled = styled.button<StandardButtonProps>`
@@ -34,27 +34,27 @@ export const StandardButtonStyled = styled.button<StandardButtonProps>`
 
 // Default props will be applied when not specified
 StandardButtonStyled.defaultProps = {
-  $color: ACCENT_RED,
-  $width: "80px",
-  $height: "40px",
-  $borderColor: ACCENT_RED,
-  $borderRadius: "10px",
-  $fontFamily: "Roboto Mono",
-  $zIndex: 100,
-  $isAbsolute: false,
-  $opacity: '1'
+    $color: ACCENT_RED,
+    $width: "80px",
+    $height: "40px",
+    $borderColor: ACCENT_RED,
+    $borderRadius: "10px",
+    $fontFamily: "Roboto Mono",
+    $zIndex: 100,
+    $isAbsolute: false,
+    $opacity: '1'
 };
 
 
 // Title Text
 
 interface StandardTextSpanProps {
-  $fontFamily?: string;
-  $fontSize?: string;
-  $color?: string;
-  $opacity?: string;
-  $margin?: string;
-  $padding?: string;
+    $fontFamily?: string;
+    $fontSize?: string;
+    $color?: string;
+    $opacity?: string;
+    $margin?: string;
+    $padding?: string;
 }
 
 export const StandardTextSpanStyled = styled.span<StandardTextSpanProps>`
@@ -63,5 +63,5 @@ export const StandardTextSpanStyled = styled.span<StandardTextSpanProps>`
   font-size: ${props => props.$fontSize || 'inherit'};
   opacity: ${props => props.$opacity || 'inherit'};
   margin: ${props => props.$margin || 'inherit'};
-  padding: ${props => props.$padding|| 'inherit'};
+  padding: ${props => props.$padding || 'inherit'};
 `;
