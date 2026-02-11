@@ -4,6 +4,10 @@ import { createTimeline, Timeline } from 'animejs';
 import { COLORS } from '../../config/constants';
 import { useAnimationSpeed } from '../../context/AnimationContext';
 
+const MOBILE_BREAKPOINT = 768;
+const isMobile = () =>
+    typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
+
 // ============================================================================
 // STYLED COMPONENTS
 // ============================================================================
@@ -13,6 +17,7 @@ const IntroContainer = styled.div`
   height: 100vh;
   position: relative;
   z-index: 100;
+  overflow: hidden;
 `;
 
 const Square = styled.div`
@@ -24,19 +29,29 @@ const Square = styled.div`
   box-shadow: 0 0 4px ${COLORS.foreground};
   background: transparent;
   visibility: hidden;
+
+  @media (max-width: ${MOBILE_BREAKPOINT - 1}px) {
+    width: 4vh;
+    height: 4vh;
+  }
 `;
 
 const TextBox = styled.div`
   position: absolute;
-  font-size: 32px;
+  font-size: clamp(20px, 4vw, 32px);
   padding: 12px;
-  width: 100%;
+  width: auto;
   visibility: hidden;
   color: ${COLORS.foreground};
   text-shadow: 0 0 32px ${COLORS.background};
+  white-space: nowrap;
 
   span {
     background: transparent;
+  }
+
+  @media (max-width: ${MOBILE_BREAKPOINT - 1}px) {
+    padding: 8px;
   }
 `;
 
@@ -60,11 +75,24 @@ const SkipButton = styled.button`
     opacity: 1;
     border-color: ${COLORS.foreground};
   }
+
+  @media (max-width: ${MOBILE_BREAKPOINT - 1}px) {
+    font-size: 12px;
+    padding: 0.4rem 0.75rem;
+    right: 3vw;
+    top: 2vh;
+  }
 `;
 
 const Scope = styled.div`
+  position: relative;
   margin-top: 5vh;
   min-height: 500px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT - 1}px) {
+    margin-top: 10vh;
+    min-height: 300px;
+  }
 `;
 
 // ============================================================================
@@ -80,6 +108,30 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
     const { getAdjustedDuration } = useAnimationSpeed();
 
     useEffect(() => {
+        const mobile = isMobile();
+
+        /*
+         * Layout concept:
+         * - Squares start at squareStartX, animate right to squareEndX
+         * - Text appears at textLeft (= squareStartX + square width + small gap)
+         *   so it sits right beside where the square began
+         * - Text vertical positions match the square rows
+         *
+         * On desktop: squares travel 5vw → 55vw, text at ~12vw
+         * On mobile:  squares travel 5vw → 80vw, text at ~12vw
+         */
+        const squareStartX = '5vw';
+        const squareEndX = mobile ? '80vw' : '55vw';
+        const squareDropY = mobile ? '8vh' : '10vh';
+
+        // Text sits just right of the square start position
+        const textLeft = mobile ? '12vw' : '12vw';
+        // Vertical positions — text-greet-1 aligns with square1 row,
+        // text-greet-2 and text-greet-3 align with the dropped square2/3 rows
+        const textTop1 = '0vh';
+        const textTop2 = mobile ? '12vh' : '15vh';
+        const textTop3 = mobile ? '18vh' : '21vh';
+
         const timeline = createTimeline({ delay: getAdjustedDuration(500) });
 
         // Initialize opacity
@@ -91,14 +143,14 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
         // Fade in and translate squares right
         timeline
             .add('.square1', {
-                x: '5vw',
+                x: squareStartX,
                 duration: getAdjustedDuration(800),
                 ease: 'out',
                 opacity: 1,
                 visibility: 'visible',
             })
             .add('.square2', {
-                x: '5vw',
+                x: squareStartX,
                 rotate: '360',
                 duration: getAdjustedDuration(500),
                 ease: 'out',
@@ -106,7 +158,7 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
                 visibility: 'visible',
             }, `-=${getAdjustedDuration(500)}`)
             .add('.square3', {
-                x: '5vw',
+                x: squareStartX,
                 duration: getAdjustedDuration(400),
                 ease: 'out',
                 opacity: 1,
@@ -116,7 +168,7 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
         // Pull down squares 2 and 3
         timeline
             .add(['.square2', '.square3'], {
-                y: '10vh',
+                y: squareDropY,
             })
             .add('.square1', {
                 ease: 'out',
@@ -125,26 +177,26 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
                 borderColor: COLORS.foreground,
             }, '<<');
 
-        // Set text positions
+        // Set text positions to align with square rows
         timeline
             .set('.text-greet-1', {
-                top: '0vh',
-                left: '200px',
+                top: textTop1,
+                left: textLeft,
             })
             .set('.text-greet-2', {
-                top: '15vh',
-                left: '200px',
+                top: textTop2,
+                left: textLeft,
             })
             .set('.text-greet-3', {
-                top: '21vh',
-                left: '200px',
+                top: textTop3,
+                left: textLeft,
             });
 
         // Move square 1 right and show "Hey"
         timeline
             .add('.square1', {
                 delay: getAdjustedDuration(100),
-                x: '55vw',
+                x: squareEndX,
                 ease: 'out(4)',
                 backgroundColor: COLORS.foreground,
             })
@@ -158,7 +210,7 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
         timeline
             .add('.square2', {
                 delay: getAdjustedDuration(100),
-                x: '55vw',
+                x: squareEndX,
                 ease: 'out(4)',
                 backgroundColor: COLORS.foreground,
             })
@@ -172,7 +224,7 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
         timeline
             .add('.square3', {
                 delay: getAdjustedDuration(100),
-                x: '55vw',
+                x: squareEndX,
                 ease: 'out(4)',
                 backgroundColor: COLORS.foreground,
             }, `<<+=${getAdjustedDuration(200)}`)
