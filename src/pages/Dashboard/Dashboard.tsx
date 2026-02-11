@@ -79,6 +79,18 @@ const Title = styled.h1`
   max-width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  padding: 1.5rem 2rem;
+  
+  /* Glass morphism effect */
+  /* background: rgba(10, 10, 10, 0.2); */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 12px;
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+  /* box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05); */
+  
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
   animation-delay: 0.3s;
@@ -98,6 +110,10 @@ const Title = styled.h1`
     animation: fadeIn 0.3s ease-out forwards;
     animation-delay: 0.1s;
   }
+  
+  @media (max-width: 640px) {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 const Subtitle = styled.h2`
@@ -108,6 +124,18 @@ const Subtitle = styled.h2`
   max-width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  padding: 1rem 2rem;
+  
+  /* Glass morphism effect */
+  /* background: rgba(10, 10, 10, 0); */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 12px;
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+  /* box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05); */
+  
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
   animation-delay: 0.6s;
@@ -126,6 +154,10 @@ const Subtitle = styled.h2`
   @media (prefers-reduced-motion: reduce) {
     animation: fadeIn 0.3s ease-out forwards;
     animation-delay: 0.2s;
+  }
+  
+  @media (max-width: 640px) {
+    padding: 0.75rem 1.5rem;
   }
 `;
 
