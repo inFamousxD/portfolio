@@ -124,7 +124,7 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
         // Set text positions
         timeline
             .set('.text-greet-1', {
-                top: '5vh',
+                top: '0vh',
                 left: '200px',
             })
             .set('.text-greet-2', {

@@ -1,15 +1,11 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS, SPACING } from '../../config/constants';
-import { animate, onScroll } from 'animejs';
+import { animate } from 'animejs';
 import { WORK_EXPERIENCES, PROJECTS, SKILLS, CONTACT_INFO } from '../../data/content';
 
 // Lazy load Arc
 const Arc = lazy(() => import('../../components/Arc/Arc'));
-
-// ============================================================================
-// STYLED COMPONENTS
-// ============================================================================
 
 const DashboardWrapper = styled.div`
   min-height: 100vh;
@@ -23,7 +19,7 @@ const GridContainer = styled.div`
   min-height: 100vh;
 `;
 
-const ArcContainer = styled.div`
+const ArcContainer = styled.div<{ $scrolled: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -31,6 +27,14 @@ const ArcContainer = styled.div`
   height: 100vh;
   z-index: 1;
   pointer-events: none;
+  opacity: ${props => props.$scrolled ? 0.4 : 1};
+  filter: ${props => props.$scrolled ? 'blur(8px)' : 'blur(0px)'};
+  transition: opacity 0.4s ease, filter 0.4s ease;
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    filter: none;
+  }
 `;
 
 const ContentSection = styled.section`
@@ -47,25 +51,148 @@ const HeroSection = styled(ContentSection)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  padding-left: 8vw;
+  
+  @media (max-width: 768px) {
+    padding-left: ${SPACING.xl};
+  }
+`;
+
+const NonHeroSection = styled(ContentSection)`
+  margin-left: 8vw;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-left: ${SPACING.lg};
+    padding-right: ${SPACING.lg};
+  }
 `;
 
 const Title = styled.h1`
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.75rem, 5vw, 3rem);
   margin-bottom: ${SPACING.lg};
   color: ${COLORS.foreground};
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 0.3s;
   
+  @keyframes fadeInUp {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
   .typed {
-    visibility: hidden;
-  }
-`;
+      visibility: hidden;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        animation: fadeInUp 0.3s ease-out forwards;
+        animation-delay: 0.1s;
+    }
+    `;
 
 const Subtitle = styled.h2`
   font-size: clamp(1.25rem, 3vw, 2rem);
   margin-bottom: ${SPACING.xl};
   color: ${COLORS.muted};
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 0.6s;
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   
   .typed {
     visibility: hidden;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: fadeInUp 0.3s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+`;
+
+const ScrollDownButton = styled.button`
+  position: fixed;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: 1px solid ${COLORS.border};
+  color: ${COLORS.muted};
+  padding: ${SPACING.md} ${SPACING.lg};
+  border-radius: 0.25rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 1s;
+  z-index: 50;
+  
+  &:hover {
+    color: ${COLORS.foreground};
+    border-color: ${COLORS.foreground};
+    transform: translateX(-50%) translateY(-3px);
+  }
+  
+  &::after {
+    content: '↓';
+    margin-left: ${SPACING.sm};
+    display: inline-block;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-5px);
+    }
+    60% {
+      transform: translateY(-3px);
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: fadeInUp 0.3s ease-out forwards;
+    animation-delay: 0.3s;
+    
+    &::after {
+      animation: none;
+    }
+    
+    &:hover {
+      transform: translateX(-50%) translateY(0);
+    }
   }
 `;
 
@@ -178,6 +305,7 @@ const ContactLink = styled.a`
 // ============================================================================
 
 const Dashboard: React.FC = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         // Animate typed text on hero
@@ -185,32 +313,55 @@ const Dashboard: React.FC = () => {
             visibility: 'visible',
             delay: (_, i) => i * 20,
             ease: 'out',
-            autoplay: onScroll({
-                container: 'body',
-                enter: 'top top',
-                leave: 'top+=90vh top',
-                sync: 0.05,
-            }),
+            // autoplay: onScroll({
+            //     container: 'body',
+            //     enter: 'top top',
+            //     leave: 'top+=90vh top',
+            //     sync: 0.05,
+            // }),
         });
 
         animate('.hero-subtitle .typed', {
             visibility: 'visible',
             delay: (_, i) => i * 15,
             ease: 'out',
-            autoplay: onScroll({
-                container: 'body',
-                enter: 'top top',
-                leave: 'top+=90vh top',
-                sync: 0.05,
-            }),
+            // autoplay: onScroll({
+            //     container: 'body',
+            //     enter: 'top top',
+            //     leave: 'top+=90vh top',
+            //     sync: 0.05,
+            // }),
         });
+
+        // Handle arc blur on scroll (glass effect)
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            
+            // Apply blur when scrolled past 20% of viewport
+            if (scrollPosition > viewportHeight * 0.2) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleScrollDown = () => {
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            skillsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
 
     return (
         <DashboardWrapper>
             <GridContainer className="grid">
-                {/* Arc background animation */}
-                <ArcContainer>
+                {/* Arc background animation with glass blur effect */}
+                <ArcContainer $scrolled={isScrolled}>
                     <Suspense fallback={null}>
                         <Arc />
                     </Suspense>
@@ -230,8 +381,13 @@ const Dashboard: React.FC = () => {
                     </Subtitle>
                 </HeroSection>
 
+                {/* Scroll Down Button - outside hero section */}
+                <ScrollDownButton onClick={handleScrollDown}>
+                    Scroll Down
+                </ScrollDownButton>
+
                 {/* Skills Section */}
-                <ContentSection id="skills">
+                <NonHeroSection id="skills">
                     <SectionTitle>Skills</SectionTitle>
                     {SKILLS.map((skill, index) => (
                         <SkillCategory key={index}>
@@ -249,10 +405,10 @@ const Dashboard: React.FC = () => {
                             </p>
                         </SkillCategory>
                     ))}
-                </ContentSection>
+                </NonHeroSection>
 
                 {/* Work Experience Section */}
-                <ContentSection id="experience">
+                <NonHeroSection id="experience">
                     <SectionTitle>Work Experience</SectionTitle>
                     {WORK_EXPERIENCES.map((work) => (
                         <WorkItem key={work.id}>
@@ -280,10 +436,10 @@ const Dashboard: React.FC = () => {
                             </TechStack>
                         </WorkItem>
                     ))}
-                </ContentSection>
+                </NonHeroSection>
 
                 {/* Projects Section */}
-                <ContentSection id="projects">
+                <NonHeroSection id="projects">
                     <SectionTitle>Projects</SectionTitle>
                     {PROJECTS.map((project) => (
                         <WorkItem key={project.id}>
@@ -319,10 +475,10 @@ const Dashboard: React.FC = () => {
                             )}
                         </WorkItem>
                     ))}
-                </ContentSection>
+                </NonHeroSection>
 
                 {/* Contact Section */}
-                <ContentSection id="contact">
+                <NonHeroSection id="contact">
                     <SectionTitle>Contact</SectionTitle>
                     <ContactLink href={`mailto:${CONTACT_INFO.email}`}>
                         <span>Email:</span> {CONTACT_INFO.email}
@@ -336,14 +492,14 @@ const Dashboard: React.FC = () => {
                     <ContactLink href={CONTACT_INFO.resume} target="_blank" rel="noopener noreferrer">
                         <span>Resume:</span> View Resume
                     </ContactLink>
-                </ContentSection>
+                </NonHeroSection>
 
                 {/* Footer */}
-                <ContentSection style={{ textAlign: 'center', paddingTop: SPACING['2xl'], paddingBottom: SPACING['3xl'] }}>
+                <NonHeroSection style={{ textAlign: 'center', paddingTop: SPACING['2xl'], paddingBottom: SPACING['3xl'] }}>
                     <p style={{ color: COLORS.muted, fontSize: '0.9rem' }}>
                         Built with React, TypeScript, and Anime.js
                     </p>
-                </ContentSection>
+                </NonHeroSection>
             </GridContainer>
         </DashboardWrapper>
     );
