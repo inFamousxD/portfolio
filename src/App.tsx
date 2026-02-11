@@ -6,7 +6,7 @@ import { IntroGreeting } from './components/IntroGreeting/IntroGreeting';
 import './styles/main.css';
 
 // Lazy load heavy components
-const Arc = lazy(() => import('./components/Arc/Arc').then(module => ({ default: module.Arc })));
+// const Arc = lazy(() => import('./components/Arc/Arc').then(module => ({ default: module.Arc })));
 const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'));
 
 // ============================================================================
