@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { createTimeline, Timeline } from "animejs";
 import { COLORS } from "../../config/constants";
@@ -7,6 +7,13 @@ import { useAnimationSpeed } from "../../context/AnimationContext";
 const ARC_COUNT = 75;
 const MOBILE_ARC_COUNT = 40;
 const MOBILE_BREAKPOINT = 768;
+
+// Determine count once at module level — avoids state-driven re-renders
+// that kill the timeline on mobile
+const getArcCount = () =>
+    typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
+        ? MOBILE_ARC_COUNT
+        : ARC_COUNT;
 
 // ============================================================================
 // STYLED COMPONENTS
@@ -28,20 +35,11 @@ const ArcRootStyled = styled.div`
 
     .container {
         position: absolute;
-        /*
-         * Use vmin so the arc scales with the smaller viewport dimension.
-         * This prevents overflow on mobile (tall+narrow) or ultra-wide screens.
-         */
         width: 70vmin;
         height: 70vmin;
         transform-origin: 50% 50%;
         border-radius: 50%;
         background: transparent;
-
-        /*
-         * Center using calc() with viewport units so that transform
-         * is entirely free for anime.js to control (rotate).
-         */
         top: calc(50vh - 35vmin);
         left: calc(50vw - 35vmin);
 
@@ -80,13 +78,13 @@ const ArcRootStyled = styled.div`
 // ============================================================================
 
 const OFFSET = {
-    ring1: 0.20,       // First contraction — outer ring stays wider
-    ring2: 0.25,       // Second contraction — less inward than before
-    dash2_mid: 0.26,   // dash-2 (inner) middle position — unchanged
-    dash2_inner: 0.32, // dash-2 inner — unchanged
-    dash2_outer: 0.28, // dash-2 outer — unchanged
-    dash_deep: 0.72,   // dash deep — pulled back a bit so outer stays visible
-    dash_mid: 0.58,    // dash mid oscillation — less inward
+    ring1: 0.20,
+    ring2: 0.25,
+    dash2_mid: 0.26,
+    dash2_inner: 0.32,
+    dash2_outer: 0.28,
+    dash_deep: 0.72,
+    dash_mid: 0.58,
 } as const;
 
 // ============================================================================
@@ -97,16 +95,9 @@ const Arc = () => {
     const arcTimeline = useRef<Timeline | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const { getAdjustedDuration } = useAnimationSpeed();
-    const [arcCount, setArcCount] = useState(ARC_COUNT);
 
-    useEffect(() => {
-        const updateCount = () => {
-            setArcCount(window.innerWidth < MOBILE_BREAKPOINT ? MOBILE_ARC_COUNT : ARC_COUNT);
-        };
-        updateCount();
-        window.addEventListener('resize', updateCount);
-        return () => window.removeEventListener('resize', updateCount);
-    }, []);
+    // Compute once on mount — no state, no re-render
+    const arcCount = useRef(getArcCount()).current;
 
     useEffect(() => {
         const container = containerRef.current;
@@ -128,7 +119,6 @@ const Arc = () => {
 
         const totalDashes = dashes.length;
 
-        // Helpers — all return values for translateX/translateY
         const ringX = (i: number, rOffset: number, hw: number) => {
             const angle = (i / totalDashes) * Math.PI * 2;
             return centerX + (radius - rOffset) * Math.cos(angle) - hw;
@@ -142,11 +132,11 @@ const Arc = () => {
             return (Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI) + extra;
         };
 
-        /*
-         * CRITICAL: Use translateX/translateY consistently for ALL dash
-         * positioning. Never mix with x/y shorthand. Container only
-         * uses rotate (no translate conflicts).
-         */
+        // Target the container element directly via ref instead of class selector.
+        // This avoids issues where anime.js queries the global DOM and may miss
+        // or double-target elements, especially on mobile after re-renders.
+        const containerEl = container;
+
         arcTimeline.current = createTimeline()
             // Phase 1: Gather at center
             .add(['.dash', '.dash-2'], {
@@ -174,8 +164,8 @@ const Arc = () => {
                 ease: 'out',
                 duration: getAdjustedDuration(2500),
             })
-            // Continuous container rotation (parallel)
-            .add('.container', {
+            // Continuous container rotation — use the DOM element directly
+            .add(containerEl, {
                 rotate: '1turn',
                 duration: getAdjustedDuration(30000),
                 ease: 'linear',
@@ -189,7 +179,7 @@ const Arc = () => {
                 duration: getAdjustedDuration(1000),
                 ease: 'inOut',
             }, `<<+=${getAdjustedDuration(1300)}`)
-            .add('.container', {
+            .add(containerEl, {
                 duration: getAdjustedDuration(2000),
                 delay: getAdjustedDuration(3000),
             }, '<<')
@@ -288,7 +278,7 @@ const Arc = () => {
                 arcTimeline.current.pause();
             }
         };
-    }, [getAdjustedDuration, arcCount]);
+    }, [getAdjustedDuration]);
 
     return (
         <ArcRootStyled>
