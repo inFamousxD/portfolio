@@ -446,7 +446,9 @@ const Dashboard: React.FC = () => {
     const handleScrollDown = () => {
         const educationSection = document.getElementById('education');
         if (educationSection) {
-            educationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const navHeight = parseFloat(getComputedStyle(document.documentElement).fontSize) * 4;
+            const top = educationSection.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+            window.scrollTo({ top, behavior: 'smooth' });
         }
     };
 

@@ -113,32 +113,32 @@ const NavActions = styled.div`
 //   }
 // `;
 
-// const MobileMenuButton = styled.button`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 4px;
-//   background: transparent;
-//   border: none;
-//   cursor: pointer;
-//   padding: ${SPACING.sm};
+const MobileMenuButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: ${SPACING.sm};
 
-//   @media (min-width: 768px) {
-//     display: none;
-//   }
+  @media (min-width: 768px) {
+    display: none;
+  }
 
-//   span {
-//     width: 20px;
-//     height: 2px;
-//     background: ${COLORS.foreground};
-//     transition: all 0.2s ease;
-//   }
+  span {
+    width: 20px;
+    height: 2px;
+    background: ${COLORS.foreground};
+    transition: all 0.2s ease;
+  }
 
-//   @media ${MEDIA_QUERIES.reducedMotion} {
-//     span {
-//       transition: none;
-//     }
-//   }
-// `;
+  @media ${MEDIA_QUERIES.reducedMotion} {
+    span {
+      transition: none;
+    }
+  }
+`;
 
 const MobileMenu = styled.div<{ $isOpen: boolean }>`
   position: fixed;
@@ -236,7 +236,7 @@ export const Navigation: React.FC = () => {
                             title="Toggle animation speed"
                         >
                             {isHighSpeed ? '5x' : '1x'}
-                        </SpeedButton>
+                        </SpeedButton> */}
 
                         <MobileMenuButton
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -245,9 +245,9 @@ export const Navigation: React.FC = () => {
                             <span />
                             <span />
                             <span />
-                        </MobileMenuButton> */}
+                        </MobileMenuButton>
                         <div style={{ fontSize: '0.75rem', color: COLORS.muted }}>
-                            <i>Made from scratch with React/TypeScript & Anime.js</i>
+                            <i>From scratch, with React/TypeScript & Anime.js</i>
                         </div>
                     </NavActions>
                 </NavInner>

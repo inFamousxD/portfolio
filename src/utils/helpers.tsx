@@ -43,9 +43,11 @@ export const smoothScrollTo = (targetOrOffset: string | number) => {
     } else {
         const element = document.querySelector(targetOrOffset);
         if (element) {
-            element.scrollIntoView({
+            const navHeight = parseFloat(getComputedStyle(document.documentElement).fontSize) * 4; // 4rem
+            const elementTop = element.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+            window.scrollTo({
+                top: elementTop,
                 behavior: 'smooth',
-                block: 'start',
             });
         }
     }
