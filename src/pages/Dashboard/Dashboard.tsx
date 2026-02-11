@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS, SPACING } from '../../config/constants';
-import { WORK_EXPERIENCES, PROJECTS, SKILLS, CONTACT_INFO } from '../../data/content';
+import { WORK_EXPERIENCES, PROJECTS, SKILLS, CONTACT_INFO, EDUCATION, ACCOMPLISHMENTS } from '../../data/content';
 
 // Lazy load Arc
 const Arc = lazy(() => import('../../components/Arc/Arc'));
@@ -290,6 +290,77 @@ const ContactLink = styled.a`
   }
 `;
 
+const EducationItem = styled.div`
+  margin-bottom: ${SPACING['2xl']};
+  
+  h3 {
+    color: ${COLORS.foreground};
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    margin-bottom: ${SPACING.xs};
+  }
+  
+  .degree {
+    color: ${COLORS.muted};
+    font-size: 1rem;
+    margin-bottom: ${SPACING.xs};
+  }
+  
+  .meta {
+    color: ${COLORS.muted};
+    font-size: 0.9rem;
+    margin-bottom: ${SPACING.sm};
+  }
+  
+  .gpa {
+    color: ${COLORS.foreground};
+    font-size: 0.95rem;
+    margin-bottom: ${SPACING.md};
+  }
+  
+  .coursework {
+    color: ${COLORS.muted};
+    font-size: 0.9rem;
+    line-height: 1.7;
+    
+    strong {
+      color: ${COLORS.foreground};
+    }
+  }
+`;
+
+const AccomplishmentItem = styled.div`
+  margin-bottom: ${SPACING.lg};
+  padding-left: 1.5rem;
+  position: relative;
+  
+  &::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: ${COLORS.foreground};
+  }
+  
+  .title {
+    color: ${COLORS.foreground};
+    font-size: 1rem;
+    margin-bottom: ${SPACING.xs};
+  }
+  
+  .organization {
+    color: ${COLORS.muted};
+    font-size: 0.9rem;
+  }
+  
+  a {
+    color: ${COLORS.foreground};
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
 // ============================================================================
 // COMPONENT
 // ============================================================================
@@ -341,9 +412,9 @@ const Dashboard: React.FC = () => {
     }, []);
 
     const handleScrollDown = () => {
-        const skillsSection = document.getElementById('skills');
-        if (skillsSection) {
-            skillsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const educationSection = document.getElementById('education');
+        if (educationSection) {
+            educationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 
@@ -367,6 +438,26 @@ const Dashboard: React.FC = () => {
                 <ScrollDownButton $visible={showScrollButton} onClick={handleScrollDown}>
                     Scroll Down
                 </ScrollDownButton>
+
+                {/* Education Section */}
+                <NonHeroSection id="education">
+                    <SectionTitle>Education</SectionTitle>
+                    {EDUCATION.map((edu) => (
+                        <EducationItem key={edu.id}>
+                            <h3>{edu.institution}</h3>
+                            <div className="degree">{edu.degree}</div>
+                            <div className="meta">
+                                {edu.period} | {edu.location}
+                            </div>
+                            {edu.gpa && <div className="gpa">GPA: {edu.gpa}</div>}
+                            {edu.coursework && (
+                                <div className="coursework">
+                                    <strong>Relevant Coursework:</strong> {edu.coursework.join(', ')}
+                                </div>
+                            )}
+                        </EducationItem>
+                    ))}
+                </NonHeroSection>
 
                 {/* Skills Section */}
                 <NonHeroSection id="skills">
@@ -459,9 +550,36 @@ const Dashboard: React.FC = () => {
                     ))}
                 </NonHeroSection>
 
+                {/* Accomplishments Section */}
+                <NonHeroSection id="accomplishments">
+                    <SectionTitle>Accomplishments</SectionTitle>
+                    {ACCOMPLISHMENTS.map((accomplishment, index) => (
+                        <AccomplishmentItem key={index}>
+                            <div className="title">
+                                {accomplishment.link ? (
+                                    <a href={accomplishment.link} target="_blank" rel="noopener noreferrer">
+                                        {accomplishment.title}
+                                    </a>
+                                ) : (
+                                    accomplishment.title
+                                )}
+                            </div>
+                            <div className="organization">
+                                {accomplishment.organization}
+                                {accomplishment.year && ` (${accomplishment.year})`}
+                            </div>
+                        </AccomplishmentItem>
+                    ))}
+                </NonHeroSection>
+
                 {/* Contact Section */}
                 <NonHeroSection id="contact">
                     <SectionTitle>Contact</SectionTitle>
+                    {CONTACT_INFO.phone && (
+                        <ContactLink href={`tel:${CONTACT_INFO.phone}`}>
+                            <span>Phone:</span> {CONTACT_INFO.phone}
+                        </ContactLink>
+                    )}
                     <ContactLink href={`mailto:${CONTACT_INFO.email}`}>
                         <span>Email:</span> {CONTACT_INFO.email}
                     </ContactLink>

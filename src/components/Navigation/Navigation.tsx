@@ -246,6 +246,9 @@ export const Navigation: React.FC = () => {
                             <span />
                             <span />
                         </MobileMenuButton> */}
+                        <div style={{ fontSize: '0.75rem', color: COLORS.muted }}>
+                            <i>Made from scratch with React/TypeScript & Anime.js</i>
+                        </div>
                     </NavActions>
                 </NavInner>
             </NavContainer>

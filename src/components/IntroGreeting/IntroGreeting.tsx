@@ -23,6 +23,7 @@ const Square = styled.div`
   border-radius: 1vh;
   box-shadow: 0 0 4px ${COLORS.foreground};
   background: transparent;
+  visibility: hidden;
 `;
 
 const TextBox = styled.div`
@@ -94,6 +95,7 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
                 duration: getAdjustedDuration(800),
                 ease: 'out',
                 opacity: 1,
+                visibility: 'visible',
             })
             .add('.square2', {
                 x: '5vw',
@@ -101,12 +103,14 @@ export const IntroGreeting: React.FC<IntroGreetingProps> = ({ onComplete }) => {
                 duration: getAdjustedDuration(500),
                 ease: 'out',
                 opacity: 1,
+                visibility: 'visible',
             }, `-=${getAdjustedDuration(500)}`)
             .add('.square3', {
                 x: '5vw',
                 duration: getAdjustedDuration(400),
                 ease: 'out',
                 opacity: 1,
+                visibility: 'visible',
             }, `-=${getAdjustedDuration(250)}`);
 
         // Pull down squares 2 and 3
