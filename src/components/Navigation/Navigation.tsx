@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS, LAYOUT, SPACING, Z_INDEX, MEDIA_QUERIES, TYPOGRAPHY } from '../../config/constants';
-import { useAnimationSpeed } from '../../context/AnimationContext';
+// import { useAnimationSpeed } from '../../context/AnimationContext';
 import { smoothScrollTo } from '../../utils/helpers';
 import { NavItem } from '../../types';
 import { animate } from 'animejs';
@@ -91,54 +91,54 @@ const NavActions = styled.div`
   align-items: center;
 `;
 
-const SpeedButton = styled.button<{ $isActive: boolean }>`
-  font-family: ${TYPOGRAPHY.fontFamily.primary};
-  font-size: ${TYPOGRAPHY.fontSize.xs};
-  color: ${({ $isActive }) => $isActive ? COLORS.foreground : COLORS.muted};
-  background: transparent;
-  border: 1px solid ${({ $isActive }) => $isActive ? COLORS.foreground : COLORS.border};
-  padding: ${SPACING.sm} ${SPACING.md};
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
+// const SpeedButton = styled.button<{ $isActive: boolean }>`
+//   font-family: ${TYPOGRAPHY.fontFamily.primary};
+//   font-size: ${TYPOGRAPHY.fontSize.xs};
+//   color: ${({ $isActive }) => $isActive ? COLORS.foreground : COLORS.muted};
+//   background: transparent;
+//   border: 1px solid ${({ $isActive }) => $isActive ? COLORS.foreground : COLORS.border};
+//   padding: ${SPACING.sm} ${SPACING.md};
+//   border-radius: 0.25rem;
+//   cursor: pointer;
+//   transition: all 0.2s ease;
+//   white-space: nowrap;
 
-  &:hover {
-    color: ${COLORS.foreground};
-    border-color: ${COLORS.foreground};
-  }
+//   &:hover {
+//     color: ${COLORS.foreground};
+//     border-color: ${COLORS.foreground};
+//   }
 
-  @media ${MEDIA_QUERIES.reducedMotion} {
-    transition: none;
-  }
-`;
+//   @media ${MEDIA_QUERIES.reducedMotion} {
+//     transition: none;
+//   }
+// `;
 
-const MobileMenuButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: ${SPACING.sm};
+// const MobileMenuButton = styled.button`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 4px;
+//   background: transparent;
+//   border: none;
+//   cursor: pointer;
+//   padding: ${SPACING.sm};
 
-  @media (min-width: 768px) {
-    display: none;
-  }
+//   @media (min-width: 768px) {
+//     display: none;
+//   }
 
-  span {
-    width: 20px;
-    height: 2px;
-    background: ${COLORS.foreground};
-    transition: all 0.2s ease;
-  }
+//   span {
+//     width: 20px;
+//     height: 2px;
+//     background: ${COLORS.foreground};
+//     transition: all 0.2s ease;
+//   }
 
-  @media ${MEDIA_QUERIES.reducedMotion} {
-    span {
-      transition: none;
-    }
-  }
-`;
+//   @media ${MEDIA_QUERIES.reducedMotion} {
+//     span {
+//       transition: none;
+//     }
+//   }
+// `;
 
 const MobileMenu = styled.div<{ $isOpen: boolean }>`
   position: fixed;
@@ -182,9 +182,9 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export const Navigation: React.FC = () => {
-    const { toggleSpeed, isHighSpeed } = useAnimationSpeed();
+    // const { toggleSpeed, isHighSpeed } = useAnimationSpeed();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
+    const [_, setIsVisible] = useState(false);
 
     useEffect(() => {
         // Animate nav in on mount
@@ -230,7 +230,7 @@ export const Navigation: React.FC = () => {
                     </NavLinks>
 
                     <NavActions>
-                        <SpeedButton
+                        {/* <SpeedButton
                             $isActive={isHighSpeed}
                             onClick={toggleSpeed}
                             title="Toggle animation speed"
@@ -245,7 +245,7 @@ export const Navigation: React.FC = () => {
                             <span />
                             <span />
                             <span />
-                        </MobileMenuButton>
+                        </MobileMenuButton> */}
                     </NavActions>
                 </NavInner>
             </NavContainer>

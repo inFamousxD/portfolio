@@ -121,7 +121,7 @@ a:focus-visible {
     z-index: 0;
     pointer-events: none;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
 }
 
 .grid-background::before {
@@ -144,6 +144,7 @@ a:focus-visible {
         /* Large grid size */ 100px 100px,
         100px 100px;
     background-position: -1px -1px;
+    transition: opacity 0.4s ease;
 }
 
 @media (min-width: 768px) {
@@ -156,9 +157,20 @@ a:focus-visible {
     }
 }
 
-/* Fade grid on scroll for better readability */
-.grid-background.faded {
-    opacity: 0.3;
+/* Dim grid on scroll for better readability */
+.grid-background.dimmed {
+    opacity: 0.45;
+}
+
+.grid-background.dimmed::before {
+    opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .grid-background,
+    .grid-background::before {
+        transition: none;
+    }
 }
 
 /* ============================================================================

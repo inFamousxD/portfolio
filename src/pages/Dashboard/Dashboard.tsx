@@ -1,7 +1,6 @@
 import React, { useEffect, Suspense, lazy, useState } from 'react';
 import styled from 'styled-components';
 import { COLORS, SPACING } from '../../config/constants';
-import { animate } from 'animejs';
 import { WORK_EXPERIENCES, PROJECTS, SKILLS, CONTACT_INFO } from '../../data/content';
 
 // Lazy load Arc
@@ -52,61 +51,39 @@ const HeroSection = styled(ContentSection)`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 8vw;
+  padding: 2rem 1rem;
+  max-width: 100%;
   
-  @media (max-width: 768px) {
-    padding-left: ${SPACING.xl};
+  @media (min-width: 768px) {
+    padding-left: 8vw;
+    padding-right: 2rem;
   }
 `;
 
 const NonHeroSection = styled(ContentSection)`
-  margin-left: 8vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
   
-  @media (max-width: 768px) {
-    margin-left: 0;
-    padding-left: ${SPACING.lg};
-    padding-right: ${SPACING.lg};
+  @media (min-width: 768px) {
+    margin-left: 8vw;
+    padding-left: ${SPACING.xl};
+    padding-right: ${SPACING.xl};
   }
 `;
 
 const Title = styled.h1`
-  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-size: clamp(1.5rem, 5vw, 3rem);
   margin-bottom: ${SPACING.lg};
   color: ${COLORS.foreground};
+  line-height: 1.3;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   opacity: 0;
-  animation: fadeInUp 1s ease-out forwards;
+  animation: fadeIn 1s ease-out forwards;
   animation-delay: 0.3s;
   
-  @keyframes fadeInUp {
-      from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-  .typed {
-      visibility: hidden;
-    }
-    
-    @media (prefers-reduced-motion: reduce) {
-        animation: fadeInUp 0.3s ease-out forwards;
-        animation-delay: 0.1s;
-    }
-    `;
-
-const Subtitle = styled.h2`
-  font-size: clamp(1.25rem, 3vw, 2rem);
-  margin-bottom: ${SPACING.xl};
-  color: ${COLORS.muted};
-  opacity: 0;
-  animation: fadeInUp 1s ease-out forwards;
-  animation-delay: 0.6s;
-  
-  @keyframes fadeInUp {
+  @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(20px);
@@ -117,17 +94,42 @@ const Subtitle = styled.h2`
     }
   }
   
-  .typed {
-    visibility: hidden;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fadeIn 0.3s ease-out forwards;
+    animation-delay: 0.1s;
+  }
+`;
+
+const Subtitle = styled.h2`
+  font-size: clamp(1rem, 3vw, 1.75rem);
+  margin-bottom: ${SPACING.xl};
+  color: ${COLORS.muted};
+  line-height: 1.4;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.6s;
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   @media (prefers-reduced-motion: reduce) {
-    animation: fadeInUp 0.3s ease-out forwards;
+    animation: fadeIn 0.3s ease-out forwards;
     animation-delay: 0.2s;
   }
 `;
 
-const ScrollDownButton = styled.button`
+const ScrollDownButton = styled.button<{ $visible: boolean }>`
   position: fixed;
   bottom: 3rem;
   left: 50%;
@@ -140,11 +142,10 @@ const ScrollDownButton = styled.button`
   font-family: 'Roboto Mono', monospace;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out forwards;
-  animation-delay: 1s;
   z-index: 50;
+  opacity: ${props => props.$visible ? 1 : 0};
+  pointer-events: ${props => props.$visible ? 'auto' : 'none'};
+  transition: opacity 0.3s ease, border-color 0.2s ease, color 0.2s ease;
   
   &:hover {
     color: ${COLORS.foreground};
@@ -157,17 +158,6 @@ const ScrollDownButton = styled.button`
     margin-left: ${SPACING.sm};
     display: inline-block;
     animation: bounce 2s infinite;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
   }
   
   @keyframes bounce {
@@ -183,8 +173,7 @@ const ScrollDownButton = styled.button`
   }
   
   @media (prefers-reduced-motion: reduce) {
-    animation: fadeInUp 0.3s ease-out forwards;
-    animation-delay: 0.3s;
+    transition: opacity 0.1s ease;
     
     &::after {
       animation: none;
@@ -289,6 +278,7 @@ const ContactLink = styled.a`
   margin-bottom: ${SPACING.md};
   font-size: 1rem;
   transition: color 0.2s ease;
+  word-wrap: break-word;
   
   &:hover {
     color: ${COLORS.muted};
@@ -306,48 +296,48 @@ const ContactLink = styled.a`
 
 const Dashboard: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [showScrollButton, setShowScrollButton] = useState(false);
 
     useEffect(() => {
-        // Animate typed text on hero
-        animate('.hero-title .typed', {
-            visibility: 'visible',
-            delay: (_, i) => i * 20,
-            ease: 'out',
-            // autoplay: onScroll({
-            //     container: 'body',
-            //     enter: 'top top',
-            //     leave: 'top+=90vh top',
-            //     sync: 0.05,
-            // }),
-        });
+        // Show button after initial delay (after other animations)
+        const timer = setTimeout(() => {
+            setShowScrollButton(true);
+        }, 1500);
 
-        animate('.hero-subtitle .typed', {
-            visibility: 'visible',
-            delay: (_, i) => i * 15,
-            ease: 'out',
-            // autoplay: onScroll({
-            //     container: 'body',
-            //     enter: 'top top',
-            //     leave: 'top+=90vh top',
-            //     sync: 0.05,
-            // }),
-        });
+        return () => clearTimeout(timer);
+    }, []);
 
-        // Handle arc blur on scroll (glass effect)
+    useEffect(() => {
+        // Handle arc blur, grid dim, and scroll button visibility on scroll
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
             const viewportHeight = window.innerHeight;
+            const gridBackground = document.querySelector('.grid-background');
             
-            // Apply blur when scrolled past 20% of viewport
+            // Apply blur/dim when scrolled past 20% of viewport
             if (scrollPosition > viewportHeight * 0.2) {
                 setIsScrolled(true);
+                setShowScrollButton(false);
+                if (gridBackground) {
+                    gridBackground.classList.add('dimmed');
+                }
             } else {
                 setIsScrolled(false);
+                // Only show button if user has scrolled back to top (not on initial load)
+                if (scrollPosition === 0 || scrollPosition < viewportHeight * 0.2) {
+                    setShowScrollButton(true);
+                }
+                if (gridBackground) {
+                    gridBackground.classList.remove('dimmed');
+                }
             }
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     const handleScrollDown = () => {
@@ -369,20 +359,12 @@ const Dashboard: React.FC = () => {
 
                 {/* Hero Section */}
                 <HeroSection id="about">
-                    <Title className="hero-title">
-                        {`I'm Aaditya. It's nice to meet you!`.split('').map((char, i) => (
-                            <span key={i} className="typed">{char}</span>
-                        ))}
-                    </Title>
-                    <Subtitle className="hero-subtitle">
-                        {`Here's a few things that I do.`.split('').map((char, i) => (
-                            <span key={i} className="typed">{char}</span>
-                        ))}
-                    </Subtitle>
+                    <Title>I'm Aaditya. It's nice to meet you!</Title>
+                    <Subtitle>Here's a few things that I do.</Subtitle>
                 </HeroSection>
 
                 {/* Scroll Down Button - outside hero section */}
-                <ScrollDownButton onClick={handleScrollDown}>
+                <ScrollDownButton $visible={showScrollButton} onClick={handleScrollDown}>
                     Scroll Down
                 </ScrollDownButton>
 
