@@ -430,9 +430,9 @@ const HazardFooter = styled.div`
     background: #0a0a0a repeating-linear-gradient(
             45deg,
             #0a0a0a,
-            #0a0a0a 5px,
-            rgba(255, 204, 0, 0.1) 5px,
-            rgba(255, 204, 0, 0.1) 10px
+            #0a0a0a 6px,
+            rgba(255, 204, 0, 0.1) 6px,
+            rgba(255, 204, 0, 0.1) 12px
     );
     margin-top: ${SPACING['4xl']};
     padding-top: ${SPACING['3xl']};
@@ -440,18 +440,19 @@ const HazardFooter = styled.div`
     -webkit-mask-image: linear-gradient(
             to bottom,
             transparent 0%,
-            black 250px
+            black 300px
     );
     mask-image: linear-gradient(
             to bottom,
             transparent 0%,
-            black 250px
+            black 300px
     );
 `;
 
 const FooterContent = styled.div`
     position: relative;
     z-index: 2;
+    padding-top: 10vh;
 `;
 
 // ============================================================================
