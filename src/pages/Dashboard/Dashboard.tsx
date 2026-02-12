@@ -422,6 +422,39 @@ const AccomplishmentItem = styled.div`
 `;
 
 // ============================================================================
+// HAZARDOUS CONCRETE FOOTER
+// ============================================================================
+
+const HazardFooter = styled.div`
+    position: relative;
+    background: #0a0a0a repeating-linear-gradient(
+            45deg,
+            #0a0a0a,
+            #0a0a0a 5px,
+            rgba(255, 204, 0, 0.1) 5px,
+            rgba(255, 204, 0, 0.1) 10px
+    );
+    margin-top: ${SPACING['4xl']};
+    padding-top: ${SPACING['3xl']};
+
+    -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 250px
+    );
+    mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 250px
+    );
+`;
+
+const FooterContent = styled.div`
+    position: relative;
+    z-index: 2;
+`;
+
+// ============================================================================
 // SNOWFLAKE HOOK
 // ============================================================================
 
@@ -719,34 +752,39 @@ const Dashboard: React.FC = () => {
                     ))}
                 </NonHeroSection>
 
-                {/* Contact Section */}
-                <NonHeroSection id="contact">
-                    <SectionTitle>Contact</SectionTitle>
-                    {CONTACT_INFO.phone && (
-                        <ContactLink href={`tel:${CONTACT_INFO.phone}`}>
-                            <span>Phone:</span> {CONTACT_INFO.phone}
-                        </ContactLink>
-                    )}
-                    <ContactLink href={`mailto:${CONTACT_INFO.email}`}>
-                        <span>Email:</span> {CONTACT_INFO.email}
-                    </ContactLink>
-                    <ContactLink href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer">
-                        <span>LinkedIn:</span> {CONTACT_INFO.linkedin}
-                    </ContactLink>
-                    <ContactLink href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer">
-                        <span>GitHub:</span> {CONTACT_INFO.github}
-                    </ContactLink>
-                    <ContactLink href={CONTACT_INFO.resume} target="_blank" rel="noopener noreferrer">
-                        <span>Resume:</span> View Resume
-                    </ContactLink>
-                </NonHeroSection>
+                {/* HAZARDOUS CONCRETE FOOTER SECTION */}
+                <HazardFooter>
+                    <FooterContent>
+                        {/* Contact Section */}
+                        <NonHeroSection id="contact">
+                            <SectionTitle>Contact</SectionTitle>
+                            {CONTACT_INFO.phone && (
+                                <ContactLink href={`tel:${CONTACT_INFO.phone}`}>
+                                    <span>Phone:</span> {CONTACT_INFO.phone}
+                                </ContactLink>
+                            )}
+                            <ContactLink href={`mailto:${CONTACT_INFO.email}`}>
+                                <span>Email:</span> {CONTACT_INFO.email}
+                            </ContactLink>
+                            <ContactLink href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer">
+                                <span>LinkedIn:</span> {CONTACT_INFO.linkedin}
+                            </ContactLink>
+                            <ContactLink href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer">
+                                <span>GitHub:</span> {CONTACT_INFO.github}
+                            </ContactLink>
+                            <ContactLink href={CONTACT_INFO.resume} target="_blank" rel="noopener noreferrer">
+                                <span>Resume:</span> View Resume
+                            </ContactLink>
+                        </NonHeroSection>
 
-                {/* Footer */}
-                <NonHeroSection style={{ textAlign: 'center', paddingTop: SPACING['2xl'], paddingBottom: SPACING['3xl'] }}>
-                    <p style={{ color: COLORS.muted, fontSize: '0.9rem' }}>
-                        Built with React, TypeScript, and Anime.js
-                    </p>
-                </NonHeroSection>
+                        {/* Footer */}
+                        <NonHeroSection style={{ textAlign: 'center', paddingTop: SPACING['2xl'], paddingBottom: SPACING['3xl'] }}>
+                            <p style={{ color: COLORS.muted, fontSize: '0.9rem' }}>
+                                Built with React, TypeScript, and Anime.js
+                            </p>
+                        </NonHeroSection>
+                    </FooterContent>
+                </HazardFooter>
             </GridContainer>
         </DashboardWrapper>
     );
