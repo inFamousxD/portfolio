@@ -109,6 +109,19 @@ const NonHeroSection = styled(ContentSection)`
         padding-left: ${SPACING.xl};
         padding-right: ${SPACING.xl};
     }
+    
+    &#contact {
+        span {
+            //background: rgba(255, 204, 0, 0.1);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            line-height: 1.4;
+        }
+    }
 `;
 
 const Title = styled.h1`
@@ -248,7 +261,7 @@ const ScrollDownButton = styled.button<{ $visible: boolean }>`
 const SectionTitle = styled.h2`
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     margin-bottom: ${SPACING['2xl']};
-    color: ${COLORS.foreground};
+    color: ${COLORS.foreground};  
 `;
 
 const SkillCategory = styled.div`
@@ -758,30 +771,30 @@ const Dashboard: React.FC = () => {
                     <FooterContent>
                         {/* Contact Section */}
                         <NonHeroSection id="contact">
-                            <SectionTitle>Contact</SectionTitle>
+                            <SectionTitle><span>Contact</span></SectionTitle>
                             {CONTACT_INFO.phone && (
                                 <ContactLink href={`tel:${CONTACT_INFO.phone}`}>
-                                    <span>Phone:</span> {CONTACT_INFO.phone}
+                                    <span>Phone: {CONTACT_INFO.phone}</span>
                                 </ContactLink>
                             )}
                             <ContactLink href={`mailto:${CONTACT_INFO.email}`}>
-                                <span>Email:</span> {CONTACT_INFO.email}
+                                <span>Email: {CONTACT_INFO.email} </span>
                             </ContactLink>
                             <ContactLink href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer">
-                                <span>LinkedIn:</span> {CONTACT_INFO.linkedin}
+                                <span>LinkedIn: {CONTACT_INFO.linkedin} </span>
                             </ContactLink>
                             <ContactLink href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer">
-                                <span>GitHub:</span> {CONTACT_INFO.github}
+                                <span>GitHub: {CONTACT_INFO.github} </span>
                             </ContactLink>
                             <ContactLink href={CONTACT_INFO.resume} target="_blank" rel="noopener noreferrer">
-                                <span>Resume:</span> View Resume
+                                <span>Resume: View Resume </span>
                             </ContactLink>
                         </NonHeroSection>
 
                         {/* Footer */}
-                        <NonHeroSection style={{ textAlign: 'center', paddingTop: SPACING['2xl'], paddingBottom: SPACING['3xl'] }}>
+                        <NonHeroSection id="contact" style={{ textAlign: 'center', paddingTop: SPACING['2xl'], paddingBottom: SPACING['3xl'] }}>
                             <p style={{ color: COLORS.muted, fontSize: '0.9rem' }}>
-                                Built with React, TypeScript, and Anime.js
+                                <span> Built with React, TypeScript, and Anime.js </span>
                             </p>
                         </NonHeroSection>
                     </FooterContent>
